@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 18, 2017 at 04:44 अपराह्न
+-- Generation Time: Dec 19, 2017 at 05:40 अपराह्न
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -19,40 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `chapagain`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bills`
---
-
-CREATE TABLE IF NOT EXISTS `bills` (
-  `id` int(15) NOT NULL AUTO_INCREMENT,
-  `description` varchar(500) NOT NULL,
-  `busn` varchar(100) NOT NULL,
-  `spentTitle` varchar(300) NOT NULL,
-  `buying` varchar(300) NOT NULL,
-  `panNo` varchar(50) NOT NULL,
-  `paymentReceiver` varchar(300) NOT NULL,
-  `billDate` date NOT NULL,
-  `amount` varchar(100) NOT NULL,
-  `remarks` varchar(300) NOT NULL,
-  `onDate` date NOT NULL,
-  `publish` varchar(3) NOT NULL,
-  `weight` int(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
-
---
--- Dumping data for table `bills`
---
-
-INSERT INTO `bills` (`id`, `description`, `busn`, `spentTitle`, `buying`, `panNo`, `paymentReceiver`, `billDate`, `amount`, `remarks`, `onDate`, `publish`, `weight`) VALUES
-(9, '&#2357;&#2366;&#2340;&#2366;&#2357;&#2352;&#2339; &#2354;&#2366;&#2311; &#2325;&#2360;&#2352;&#2367; &#2348;&#2330;&#2366;&#2313;&#2344; &#2360;&#2325;&#2367;&#2344;&#2381;&#2331;', 'sdf', 'sd', 'sdf', 'sdf', 'sdf', '2073-06-03', '56765', '', '2016-10-02', 'Yes', 10),
-(10, '&#2313;&#2340;&#2381;&#2346;&#2366;&#2342;&#2344; &#2360;&#2366;&#2350;&#2366;&#2327;&#2381;&#2352;&#2368;&#2325;&#2379; &#2349;&#2369;&#2325;&#2381;&#2340;&#2366;&#2344;&#2368; ', '&#2409;&#2407;&#2408;&#2407;&#2407;&#2414;&#2409;', '&#2408;&#2408;&#2411;&#2408;&#2407;', '&#2360;&#2379;&#2333;&#2376;', '&#2409;&#2406;&#2410;&#2411;&#2411;&#2413;&#2413;&', '&#2332;&#2351; &#2358;&#2381;&#2352;&#2368; &#2358;&#2381;&#2351;&#2366;&#2350; &#2335;&#2381;&#2352;&#2375;&#2337;&#2367;&#2329;&#2381;&#2327; &#2325;&#2344;&#2381;&#2360;&#2344;', '2073-06-12', '&#2413;&#2411;&#2408;&#2410;&#2412;.&#2413;&#2406;', '', '2016-10-02', 'Yes', 20),
-(12, '&#2331;&#2346;&#2366;&#2311; &#2360;&#2350;&#2381;&#2348;&#2344;&#2381;&#2343;&#2368;', '&#2409;&#2407;&#2408;&#2407;&#2407;&#2414;&#2409;', '&#2408;&#2408;&#2411;&#2408;&#2408;', '&#2360;&#2366;&#2375;&#2333;&#2376;', '&#2412;&#2406;&#2407;&#2412;&#2410;&#2409;&#2413;&', '&#2332;&#2367; &#2319;&#2360;&#2381; &#2319;&#2339;&#2381;&#2337; &#2350;&#2367;&#2337;&#2367;&#2351;&#2366; &#2360;&#2352;&#2381;&#2349;&#2367;&#2360;', '0000-00-00', '&#2412;&#2406;&#2406;&#2406;&#2406;&#2404;', '', '2016-11-28', 'Yes', 30),
-(13, '&#2352;&#2366;&#2311;&#2332;&#2379;&#2348;&#2367;&#2351;&#2350; &#2350;&#2354;&#2350;&#2366; &#2309;&#2344;&#2369;&#2342;&#2366;&#2344;', '&#2409;&#2407;&#2408;&#2407;&#2407;&#2414;&#2409;', '&#2408;&#2412;&#2410;&#2407;&#2409;', '&#2360;&#2367;&#2354;&#2348;&#2344;&#2381;&#2342;&#2368; &#2342;&#2352;&#2349;&#2366;&#2313;&#2346;&#2340;&#2381;&#2352;', '&#2409;&#2406;&#2411;&#2406;&#2407;&#2415;&#2409;&', '&#2346;&#2381;&#2352;&#2366;&#2352;&#2350;&#2381;&#2349; &#2348;&#2366;&#2351;&#2366;&#2375;&#2335;&#2375;&#2325; &#2335;&#2375;&#2325;&#2381;&#2344;&#2379;&#2354;&#2379;&#2332;&#2368; &#2347;&#2352; &#2344;&#2375;&#2330;&#2352;', '2073-08-05', '&#2412;&#2407;&#2415;&#2410;&#2414;&#2412;&#2404;', '', '2016-11-28', 'Yes', 40),
-(14, '&#2350;&#2375;&#2358;&#2367;&#2344;&#2352;&#2368; &#2309;&#2366;&#2376;&#2332;&#2366;&#2352; &#2360;&#2350;&#2381;&#2348;&#2344;&#2381;&#2343;&#2368;', '&#2409;&#2407;&#2408;&#2407;&#2407;&#2414;&#2410;', '&#2408;&#2415;&#2411;&#2407;&#2407;', '&#2360;&#2379;&#2333;&#2376; ', '&#2412;&#2406;&#2407;&#2409;&#2415;&#2411;&#2409;&', 'LOYAL COMPUTER INFOSYS, NEW ROAD, KTM', '0000-00-00', '&#2407;&#2411;&#2413;&#2411;&#2408;&#2408;&#2404;&#2407;&#2408;', '', '2016-11-28', 'Yes', 50);
 
 -- --------------------------------------------------------
 
@@ -151,6 +117,30 @@ INSERT INTO `district` (`id`, `name`, `code`, `ecozone`, `devregion`, `publish`,
 (77, 'डडेलधुरा ', '073', 'पहाड', 'सुदूर-पश्चिमाञ्चल विकास क्षेत्र', 'Yes', 730),
 (78, 'वैतडी', '074', 'पहाड', 'सुदूर-पश्चिमाञ्चल विकास क्षेत्र', 'Yes', 740),
 (79, 'दार्चुला ', '075', 'पहाड', 'सुदूर-पश्चिमाञ्चल विकास क्षेत्र', 'Yes', 750);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `family`
+--
+
+CREATE TABLE IF NOT EXISTS `family` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `fatherName` varchar(255) NOT NULL,
+  `motherName` varchar(255) NOT NULL,
+  `birthDate` date NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `maritalStatus` varchar(255) NOT NULL,
+  `gotraId` int(11) NOT NULL,
+  `regionId` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `publish` varchar(3) NOT NULL,
+  `onDate` date NOT NULL,
+  `weight` int(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -491,148 +481,17 @@ INSERT INTO `listingfiles` (`id`, `caption`, `filename`, `listingId`, `onDate`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ph_texture`
+-- Table structure for table `region`
 --
 
-CREATE TABLE IF NOT EXISTS `ph_texture` (
-  `ph_id` int(10) NOT NULL AUTO_INCREMENT,
-  `ph_value` varchar(255) NOT NULL,
-  `pahad_balaute_domat` float NOT NULL,
-  `pahad_domat` float NOT NULL,
-  `pahad_chimtyaelo_domat` float NOT NULL,
-  `tarai_balaute_domat` float NOT NULL,
-  `tarai_domat` float NOT NULL,
-  `tarai_chimtyaelo_domat` float NOT NULL,
-  `publish` varchar(3) NOT NULL,
-  `weight` int(10) NOT NULL,
-  PRIMARY KEY (`ph_id`),
-  KEY `ph_id` (`ph_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
-
---
--- Dumping data for table `ph_texture`
---
-
-INSERT INTO `ph_texture` (`ph_id`, `ph_value`, `pahad_balaute_domat`, `pahad_domat`, `pahad_chimtyaelo_domat`, `tarai_balaute_domat`, `tarai_domat`, `tarai_chimtyaelo_domat`, `publish`, `weight`) VALUES
-(1, '6.4', 15, 20, 24, 8, 14, 22, 'Yes', 10),
-(3, '6.3', 29, 40, 48, 15, 24, 44, 'Yes', 20),
-(4, '6.2', 43, 60, 72, 23, 34, 64, 'Yes', 30),
-(5, '6.1', 58, 78, 98, 30, 44, 86, 'Yes', 40),
-(6, '6', 71, 92, 120, 38, 52, 106, 'Yes', 50),
-(7, '5.9', 85, 110, 146, 45, 62, 128, 'Yes', 60),
-(8, '5.8', 97, 128, 166, 52, 72, 146, 'Yes', 70),
-(9, '5.7', 108, 142, 188, 58, 82, 166, 'Yes', 80),
-(10, '5.6', 119, 158, 208, 64, 90, 184, 'Yes', 90),
-(11, '5.5', 130, 170, 230, 70, 100, 200, 'Yes', 100),
-(12, '5.4', 140, 188, 252, 76, 110, 220, 'Yes', 110),
-(13, '5.3', 150, 204, 274, 81, 118, 238, 'Yes', 120),
-(14, '5.2', 160, 218, 294, 86, 126, 254, 'Yes', 130),
-(15, '5.1', 169, 228, 314, 91, 136, 270, 'Yes', 140),
-(16, '5', 176, 240, 334, 96, 142, 286, 'Yes', 150),
-(17, '4.9', 184, 252, 354, 101, 150, 302, 'Yes', 160),
-(18, '4.8', 191, 262, 374, 106, 158, 316, 'Yes', 170),
-(19, '4.7', 199, 272, 390, 111, 166, 330, 'Yes', 180),
-(20, '4.6', 205, 280, 406, 120, 180, 340, 'Yes', 190),
-(21, '4.5', 210, 290, 420, 120, 180, 350, 'Yes', 200);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `recommendation`
---
-
-CREATE TABLE IF NOT EXISTS `recommendation` (
-  `rm_id` int(10) NOT NULL AUTO_INCREMENT,
-  `crop_name` text NOT NULL,
-  `nitrogen_max` float NOT NULL,
-  `nitrogen_mid` float NOT NULL,
-  `nitrogen_min` float NOT NULL,
-  `phosphorus_max` float NOT NULL,
-  `phosphorus_mid` float NOT NULL,
-  `phosphorus_min` float NOT NULL,
-  `potas_max` float NOT NULL,
-  `potas_mid` float NOT NULL,
-  `potas_min` float NOT NULL,
-  `publish` varchar(3) NOT NULL,
-  `weight` int(10) NOT NULL,
-  PRIMARY KEY (`rm_id`),
-  KEY `ph_id` (`rm_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=32 ;
-
---
--- Dumping data for table `recommendation`
---
-
-INSERT INTO `recommendation` (`rm_id`, `crop_name`, `nitrogen_max`, `nitrogen_mid`, `nitrogen_min`, `phosphorus_max`, `phosphorus_mid`, `phosphorus_min`, `potas_max`, `potas_mid`, `potas_min`, `publish`, `weight`) VALUES
-(1, 'धान सिंचित ', 5, 2.5, 1.25, 1.5, 0.75, 0.38, 1.5, 0.75, 0.38, 'Yes', 10),
-(2, 'धान असिंचित', 3, 1.5, 0.75, 1, 0.5, 0.25, 1, 0.5, 0.25, 'Yes', 20),
-(3, 'मकै बर्षे ', 3, 1.5, 0.75, 1.5, 0.75, 0.38, 1.5, 0.75, 0.38, 'Yes', 30),
-(4, 'मकै हिउदे', 4.5, 2.25, 1.13, 2.25, 1.13, 0.56, 2.25, 1.13, 0.56, 'Yes', 40),
-(5, 'गहुँ सिंचित', 5, 2.5, 1.25, 2.5, 1.25, 0.63, 1.3, 0.65, 0.33, 'Yes', 50),
-(6, 'गहुँ असिंचित', 2.5, 1.25, 0.63, 2.5, 1.25, 0.63, 1, 0.5, 0.25, 'Yes', 60),
-(7, 'कोदो उन्नत ', 3, 1.5, 0.75, 2, 1, 0.5, 1.5, 0.75, 0.38, 'Yes', 70),
-(8, 'उखु (मोरहन बाली) ', 6, 3, 1.5, 3, 1.5, 0.75, 2, 1, 0.5, 'Yes', 80),
-(9, 'उखु (खुटीबाली )', 7.5, 3.75, 1.88, 3, 1.5, 0.75, 2, 1, 0.5, 'Yes', 90),
-(10, 'तोरी रायो  ', 3, 1.5, 0.75, 2, 1, 0.5, 1, 0.5, 0.25, 'Yes', 100),
-(11, 'जौ , उवा', 2, 1, 0.5, 2, 1, 0.5, 1.5, 0.75, 0.38, 'Yes', 110),
-(12, 'फापर ', 1.5, 0.75, 0.38, 1.5, 0.75, 0.38, 1, 0.5, 0.25, 'Yes', 120),
-(13, 'अदुवा , अलैची', 2.5, 1.25, 0.63, 1.5, 0.75, 0.38, 2.5, 1.25, 0.63, 'Yes', 130),
-(14, 'आलु ', 11, 5.5, 2.75, 7, 3.5, 1.75, 5, 2.5, 1.25, 'Yes', 140),
-(15, 'तरकारी बाली सागपात जात', 10, 5, 2.5, 9, 4.5, 2.25, 4, 2, 1, 'Yes', 150),
-(16, 'तरकारी बाली जरे जात', 10, 5, 2.5, 9, 4.5, 2.25, 4, 2, 1, 'Yes', 160),
-(17, 'हरियो केराउ', 0.75, 0.38, 0.19, 2, 1, 0.5, 6, 3, 1.5, 'Yes', 170),
-(18, 'काँक्रो', 7, 3.5, 1.75, 2, 1, 0.5, 5, 2.5, 1.25, 'Yes', 180),
-(19, 'जुकिनि', 12, 6, 3, 9, 4.5, 2.25, 3, 1.25, 0.75, 'Yes', 190),
-(20, 'गोलभेंडा (सृजना) ', 10, 5, 2.5, 9, 4.5, 2.25, 4, 2, 1, 'Yes', 200),
-(21, 'गोलभेंडा ( होचा आन्य जात )', 10, 5, 2.5, 10, 5, 2.5, 7.5, 3.75, 1.88, 'Yes', 210),
-(22, 'भन्टा  ', 10, 5, 2.5, 9, 4.5, 2.25, 4, 2, 1, 'Yes', 220),
-(23, 'रामतोरिया ', 1, 5, 2.5, 9, 4.5, 2.25, 3, 1.5, 0.75, 'Yes', 230),
-(24, 'काउली (लोकल )', 10, 5, 2.5, 6, 3, 1.5, 4, 2, 1, 'Yes', 240),
-(25, 'काउली (हईब्रिड)', 10, 5, 2.5, 6, 3, 1.5, 5, 2.5, 1.25, 'Yes', 250),
-(26, 'बन्दा ', 12, 6, 3, 9, 4.5, 2.25, 4, 2, 1, 'Yes', 260),
-(27, 'सिमि ', 4, 2, 1, 6, 3, 1.5, 3, 1.5, 0.75, 'Yes', 270),
-(28, 'तितेकरेला ', 10, 5, 2.5, 6, 3, 1.5, 3, 1.5, 0.75, 'Yes', 280),
-(29, 'तने बोडी ', 4, 2, 1, 6, 3, 1.5, 2, 1, 0.5, 'Yes', 290),
-(30, 'भेंडा खुर्सानी ', 10, 5, 2.5, 5, 2.5, 1.25, 5, 2.5, 1.25, 'Yes', 300),
-(31, 'प्याज ', 12, 6, 3, 9, 4.5, 2.25, 4, 2, 1, 'Yes', 310);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `report_table`
---
-
-CREATE TABLE IF NOT EXISTS `report_table` (
-  `report_id` int(10) NOT NULL AUTO_INCREMENT,
-  `generated_date` date NOT NULL,
-  `registration_number` varchar(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS `region` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `land_address` varchar(500) NOT NULL,
-  `ward_number` varchar(255) NOT NULL,
-  `district` int(10) NOT NULL,
-  `kitta_number` varchar(255) NOT NULL,
-  `khet_baari` varchar(255) NOT NULL,
-  `sand_format` int(1) NOT NULL,
-  `ph_value` varchar(255) NOT NULL,
-  `organic_value` varchar(255) NOT NULL,
-  `nitrogen_value` float NOT NULL,
-  `phosphorus_value` float NOT NULL,
-  `potas_value` float NOT NULL,
-  PRIMARY KEY (`report_id`),
-  KEY `ph_id` (`report_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
-
---
--- Dumping data for table `report_table`
---
-
-INSERT INTO `report_table` (`report_id`, `generated_date`, `registration_number`, `name`, `land_address`, `ward_number`, `district`, `kitta_number`, `khet_baari`, `sand_format`, `ph_value`, `organic_value`, `nitrogen_value`, `phosphorus_value`, `potas_value`) VALUES
-(8, '2073-06-03', '21', 'Bharat', 'Dhaddhai', '6', 48, '125', 'खेत', 2, '3.5', '0.85', 5, 20, 15),
-(3, '2073-06-05', 'चलानि', 'ानिसह', 'कोतहिाौा', '4', 48, '54', 'गारको', 1, '6', '10', 2, 3, 4),
-(4, '2073-06-12', '212', 'asdasferwe', 'sdsfs', '23', 2, '21312', '123', 2, '5', '6', 2, 5, 3),
-(5, '2073-06-05', '5', 'Ashok', 'kaski', '7', 59, '10', 'khet', 1, '5.9', '2.1', 0.15, 43, 12),
-(6, '2073-06-06', '2', 'akash', 'adf', '1', 2, '2', 'bari', 1, '5.1', '.12', 0.09, 35, 109),
-(7, '2073-06-16', '१०५', 'राम', 'धापाखेल', '२२', 2, '-', 'खेत', 2, '3.0', '2.3', 0.11, 55, 210);
+  `onDate` date NOT NULL,
+  `publish` varchar(3) NOT NULL,
+  `weight` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -702,7 +561,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `lastLogin`, `loginTimes`, `status`, `userGroupId`) VALUES
-(1, 'admin', 'chapagain_123_#', '2017-12-18 21:27:35', 475, 'A', 1),
+(1, 'admin', 'chapagain_123_#', '2017-12-19 19:47:09', 477, 'A', 1),
 (2, 'manager', 'manager', '2017-01-12 21:32:00', 36, 'A', 2);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
