@@ -35,4 +35,12 @@
             <li><a href="cms.php?groupType=Other">Manage Other</a></li>
     	</ul>
   	</li>
+
+    <li>
+      <p>Manage Family</p>
+      <ul>
+            <li><a href="region.php">Manage Family Region</a></li>
+      </ul>
+    </li>
+
 </ul>
