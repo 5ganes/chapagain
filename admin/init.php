@@ -13,6 +13,13 @@ require_once("../data/listingfiles.php");
 // require_once("../data/testimonials.php");
 require_once("../data/feedbacks.php");
 require_once("../data/program.php");
+require_once("../data/region.php");
+require_once("../data/gotra.php");
+require_once("../data/family.php");
+
+$family = new Family();
+$gotra = new Gotra();
+$region = new Region();
 $program = new Program();
 
 $conn 					= new Dbconn();		

@@ -1,6 +1,6 @@
 <?php
 ////////////////ADMIN DEFAULT CONSTANTS////////////////////////
-define("ADMIN_PAGE_WIDTH", 1000);
+define("ADMIN_PAGE_WIDTH", 1100);
 define("ADMIN_LEFT_WIDTH", "20%");
 define("ADMIN_BODY_WIDTH", "80%");
 define("ADMIN_TITLE", "Admin Control Panel");
@@ -16,6 +16,8 @@ define("CMS_LISTING_FILES_DIR", "files/listingfiles/");
 define("CMS_GROUPS_DIR", "files/groups/");
 define("CMS_TESTIMONIALS_DIR", "files/testimonials/");
 define("CMS_ADDS_DIR", "files/adds/");
+
+define("CMS_FAMILY_DIR", "files/family/");
 
 define("ADMIN_VIDEO_GALLERY_LIMIT", 6); // VIDEO GALLERY LIMIT FOR ADMIN
 define("ADMIN_GALLERY_LIMIT", 20); // IMAGE GALLERY LIMIT FOR ADMIN

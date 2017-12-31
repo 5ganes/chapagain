@@ -11,27 +11,27 @@
   else
     $id = 0;
       
-  $weight = $region -> getLastWeight();
+  $weight = $gotra -> getLastWeight();
   if($_GET['type'] == "edit"){
-    $result = $region->getById($_GET['id']);
+    $result = $gotra->getById($_GET['id']);
     // $editRow = $conn->fetchArray($result);  
     extract($result);
   }
   if($_POST['type'] == "Save"){
     extract($_POST);
     if($name=="")
-      $errMsg .= "<li>Please enter Region Name</li>";
+      $errMsg .= "<li>Please enter Gotra Name</li>";
     if($weight=="")
       $errMsg .= "<li>Please enter weight</li>";
     
     if(empty($errMsg)){
-      $pid = $region -> saveOrUpdate($id, $name, $publish, $weight);
+      $pid = $gotra -> saveOrUpdate($id, $name, $publish, $weight);
       if($id > 0)
         $pid = $id;
       if($id > 0)
-        header('Location: region.php?type=edit&id='.$id.'&msg=Region details updated successfully');
+        header('Location: gotra.php?type=edit&id='.$id.'&msg=Gotra details updated successfully');
       else
-        header('Location: region.php?msg=Region details saved successfully');
+        header('Location: gotra.php?msg=Gotra details saved successfully');
       exit();
     }   
   }
@@ -43,12 +43,12 @@
     
   //   $sql = "UPDATE crop SET publish='$changeTo' WHERE id='$id'";
   //   $conn->exec($sql);
-  //   header('location: region.php?&msg=Crop Show/Hide status toogled successfully.');
+  //   header('location: gotra.php?&msg=Crop Show/Hide status toogled successfully.');
   // }
 
   if($_GET['type']=="del"){
-      $region -> delete($_GET['id']);
-      header("Location:region.php?msg=Region deleted successfully.");   
+      $gotra -> delete($_GET['id']);
+      header("Location:gotra.php?msg=Gotra deleted successfully.");   
   }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -80,9 +80,9 @@
               <tr>
                 <td bgcolor="#fff"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td class="heading2">&nbsp; Manage Family Region
+                    <td class="heading2">&nbsp; Manage Family Gotra
                       <div style="float: right;">
-                        <? $addNewLink = "region.php"; ?>
+                        <? $addNewLink = "gotra.php"; ?>
                         <a href="<?= $addNewLink?>" class="headLink">Add New</a></div></td>
                   </tr>
                   <tr>
@@ -97,7 +97,7 @@
                          <tr><td></td></tr>
                           <tr>
                             <td>&nbsp;</td>
-                            <td class="tahomabold11"><strong> Region Name : <span class="asterisk">*</span></strong></td>
+                            <td class="tahomabold11"><strong> Gotra Name : <span class="asterisk">*</span></strong></td>
                             <td>
                               <input name="name" type="text" class="text" value="<?=$name;?>" required />
                             </td>
@@ -152,7 +152,7 @@
                   <td bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                       <tr>
                           <td class="heading2">
-                            Region List
+                            Gotra List
                         </td>
                       </tr>
                       <tr>
@@ -160,7 +160,7 @@
                             <tr bgcolor="#F1F1F1" class="tahomabold11">
                               <td width="1">&nbsp;</td>
                               <td style="width:20px"><strong>SN</strong></td>
-                              <td style="width:150px">Region Name</td>
+                              <td style="width:150px">Gotra Name</td>
                               <td style="width:10px;">Show</td>
                               <td style="width:10px">Weight</td>
                               <td style="width:73px"><strong>Action</strong></td>
@@ -168,9 +168,9 @@
                             <?php
                 
                   $counter = 0;
-                  $pagename = "region.php?";
+                  $pagename = "gotra.php?";
                   $limit = 50;
-                  $sql = "SELECT * FROM region";
+                  $sql = "SELECT * FROM gotra";
                   $sql=$sql." ORDER BY weight";
                   include("paging.php"); $sn = 1;
                   while($row = $conn -> fetchArray($result))
@@ -183,9 +183,9 @@
                                     
                                       <td valign="top"><?= $row['weight'] ?></td>
                                       <td valign="top">
-                                        [ <a href="region.php?type=edit&id=<?= $row['id']?>">Edit</a> | 
+                                        [ <a href="gotra.php?type=edit&id=<?= $row['id']?>">Edit</a> | 
                                           <a href="#" onClick="javascript: if(confirm('This will permanently remove this region from database. Continue?')){
-                                           document.location='region.php?type=del&id=<?php echo $row['id']; ?>'; }">Delete</a> ]
+                                           document.location='gotra.php?type=del&id=<?php echo $row['id']; ?>'; }">Delete</a> ]
                                     </td>
                                   </tr>
                                 <? }?>

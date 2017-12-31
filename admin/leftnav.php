@@ -40,6 +40,8 @@
       <p>Manage Family</p>
       <ul>
             <li><a href="region.php">Manage Family Region</a></li>
+            <li><a href="gotra.php">Manage Family Gotra</a></li>
+            <li><a href="family.php">Manage Family Member</a></li>
       </ul>
     </li>
 
