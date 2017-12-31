@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.9
+-- version 4.2.11
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Dec 19, 2017 at 05:40 अपराह्न
--- Server version: 5.6.14
--- PHP Version: 5.5.6
+-- Host: 127.0.0.1
+-- Generation Time: Dec 31, 2017 at 07:17 AM
+-- Server version: 5.6.21
+-- PHP Version: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,15 +27,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `district` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+`id` int(10) NOT NULL,
   `name` varchar(250) NOT NULL,
   `code` varchar(20) NOT NULL,
   `ecozone` varchar(500) NOT NULL,
   `devregion` varchar(500) NOT NULL,
   `publish` varchar(3) NOT NULL,
-  `weight` int(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
+  `weight` int(10) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `district`
@@ -125,22 +124,29 @@ INSERT INTO `district` (`id`, `name`, `code`, `ecozone`, `devregion`, `publish`,
 --
 
 CREATE TABLE IF NOT EXISTS `family` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `fatherName` varchar(255) NOT NULL,
-  `motherName` varchar(255) NOT NULL,
+`id` int(30) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `birthDate` date NOT NULL,
   `email` varchar(255) NOT NULL,
-  `phone` varchar(255) NOT NULL,
-  `maritalStatus` varchar(255) NOT NULL,
+  `phone` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `maritalStatus` varchar(255) CHARACTER SET utf8 NOT NULL,
   `gotraId` int(11) NOT NULL,
   `regionId` int(11) NOT NULL,
+  `gender` varchar(255) CHARACTER SET utf8 NOT NULL,
   `image` varchar(255) NOT NULL,
   `publish` varchar(3) NOT NULL,
   `onDate` date NOT NULL,
-  `weight` int(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `weight` int(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `family`
+--
+
+INSERT INTO `family` (`id`, `name`, `birthDate`, `email`, `phone`, `maritalStatus`, `gotraId`, `regionId`, `gender`, `image`, `publish`, `onDate`, `weight`) VALUES
+(2, 'Test Name Male', '2015-10-21', 'test@gmail.com', '76776787', 'Married', 10, 6, 'Male', 'Job_Search-512.png', 'Yes', '2017-12-28', 10),
+(3, 'Test Name Female', '2017-12-03', 'tsetfemale@gmail.com', '89989889', 'Married', 11, 7, 'Female', 'Leo.png', 'Yes', '2017-12-28', 20),
+(4, 'First Child Male', '2017-12-27', 'ch1@gmail.com', '8978799', 'Unmarried', 10, 6, 'Male', 'lions_logo.png', 'Yes', '2017-12-28', 30);
 
 -- --------------------------------------------------------
 
@@ -149,16 +155,15 @@ CREATE TABLE IF NOT EXISTS `family` (
 --
 
 CREATE TABLE IF NOT EXISTS `feedbacks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `subject` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `comment` text CHARACTER SET utf8,
-  `onDate` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+  `onDate` datetime DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `feedbacks`
@@ -172,11 +177,34 @@ INSERT INTO `feedbacks` (`id`, `name`, `address`, `phone`, `email`, `subject`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gotra`
+--
+
+CREATE TABLE IF NOT EXISTS `gotra` (
+`id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `onDate` date NOT NULL,
+  `publish` varchar(3) NOT NULL,
+  `weight` int(10) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `gotra`
+--
+
+INSERT INTO `gotra` (`id`, `name`, `onDate`, `publish`, `weight`) VALUES
+(9, 'First gotra', '2017-12-26', 'Yes', 10),
+(10, 'Second gotra', '2017-12-26', 'Yes', 20),
+(11, 'Third gotra', '2017-12-26', 'Yes', 30);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `groups`
 --
 
 CREATE TABLE IF NOT EXISTS `groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL DEFAULT '',
   `nameen` varchar(255) NOT NULL,
   `urlname` varchar(250) CHARACTER SET latin1 NOT NULL,
@@ -198,10 +226,8 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `pageTitle` text CHARACTER SET latin1 NOT NULL,
   `pageKeyword` text CHARACTER SET latin1 NOT NULL,
   `activity` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `publish` varchar(3) CHARACTER SET latin1 NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `urlname` (`urlname`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=833 ;
+  `publish` varchar(3) CHARACTER SET latin1 NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=833 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `groups`
@@ -228,7 +254,7 @@ INSERT INTO `groups` (`id`, `name`, `nameen`, `urlname`, `type`, `parentId`, `sh
 (603, 'स्वच्छ वातावरण सम्बन्धी', 'Clean Environment Add', 'clean-environment', 'Navigation', 601, '', '', 'https://www.youtube.com/embed/jZcKXTc0PXE', '', 'Link', 20, 'no', '2017-03-09', '', 'normal', 'No', '', '', '', '', '', ''),
 (604, 'सार्वजनिक गाडिको धुवाँ मापन सम्बन्धी', 'Vesicle emission measurement  ', 'local-trans-smoke', 'Navigation', 601, '', '', 'https://www.youtube.com/embed/blhdvFnl8AA', '', 'Link', 30, 'no', '2017-03-09', '', 'normal', 'No', '', '', '', '', '', ''),
 (605, 'वातावरण सम्बन्धी अन्तरवार्ता', 'Interview about DoEnv', 'interview-doenv', 'Navigation', 601, '', '', 'https://www.youtube.com/embed/elhRNoN1EIQ', '', 'Link', 40, 'no', '2017-03-09', '', 'normal', 'No', '', '', '', '', '', ''),
-(338, '&#2361;&#2366;&#2350;&#2381;&#2352;&#2379; &#2348;&#2366;&#2352;&#2375;&#2350;&#2366;', 'About Us', 'about-us', 'Header', 0, 'Protection of human health through preserving our lovely planet is one of the primary obligations for all the states. Environment is a cross-cutting issue which covers the total of all surroundings of a living organism, including natural forces and other living things. In present days, the promotion of environmental friendly activities through awareness and implementation as well as enforcement to the concerned agencies has becoming widely realized interventions.', 'Protection of human health through preserving our lovely planet is one of the primary obligations for all the states. Environment is a cross-cutting issue which covers the total of all surroundings of a living organism, including natural forces and other living things. In present days, the promotion of environmental friendly activities through awareness and implementation as well as enforcement to the concerned agencies has becoming widely realized interventions.', '<strong>Background (About US)</strong>\r\n<div style="text-align: justify;">Protection of human health through preserving our lovely planet is one of the primary obligations for all the states. Environment is a cross-cutting issue which covers the total of all surroundings of a living organism, including natural forces and other living things. In present days, the promotion of environmental friendly activities through awareness and implementation as well as enforcement to the concerned agencies has becoming widely realized interventions.<br />\r\nEnvironmental degradation and global warming has becoming widespread concerns and Nepal is no exception. Elsewhere the climate change has becoming buzz word and its impact on sectoral issues mainly in agriculture, forest; water resources and threatening livelihood of the people are to be addressed largely. Both anthropogenic as well as natural factors have triggered these issues. In fact they are interrelated process to each other which should be taken into well consideration while planning the adaptation and mitigation programs. In addition to these issues, pollution related to air, water, soil, noise and municipal wastages have becoming primary environmental concerns in Nepal. Their apparent effects are largely realized from policy level to the implementation levels. In order to minimize the problems, both legal and implementation aspects should be made stronger within the framework of the Government Policy, Act, Regulations, Standards and Guidelines. The former issues can be addressed at the higher level, whereas the later issues through the implementation level by the Departments and organizations working in the grass root level. In view of this effect, a functional arm of the Ministry with the mandate for implementation, monitoring and enforcement of the environmental activities in Nepal was realized since long time. In addition to the Environment Protection Act (1997) and Environment Protection Rules (1997), the Interim Constitution of Nepal (2007, Article 16) has also emphasized on the right to live in a healthy environment.<br />\r\nTo outreach the concept of environmental management in grass root level, to resolve the problems created by climate change and due to anthropogenic factor, to coordinate between governmental, non-governmental and private organizations and to effective monitoring of environmental management, Government of Nepal established the Department of Environment (DoE) in 27 July 2012 (As of 12 Shrawan 2069 BS) under the Ministry of Science, Technology and Environment (MoSTE). As per the Secretary level decision in 5 March 2013, (As of 22 Phalgun 2069 BS) Department was formally opened in Information Technology (IT), Park, Panauti, Kavre District. It was a mean time adjustment until having its office in Kathmandu. As a result of the difficulties to cope the work load with growing numbers of stakeholders&#39; request, the Department finally moved to Kupandole, Lalitpur District by the Minister level decision on 28 October 2013 (As of 11 Kartik 2070 BS). Ever since of its establishment, it has shown its presence in the national and international level. It is widely believed that the Department will be an instrumental in dealing the environmental related issues and maintaining and enhancing the quality environment for the descent life and livelihood through promotional and enforcement related efforts.</div>\r\n<strong>Long-term vision (Vision)</strong>\r\n\r\n<ul>\r\n	<li>To upscale and out-scale the concept of environmental management in grass root level and to create hassle free environment.</li>\r\n	<li>To aid in achieving sustainable development by the wise use of natural resources and arriving at an optimal balance between environment and economy.</li>\r\n	<li>To contribute towards the sustainable society by developing the conducive environment against climate induced challenges and anthropogenic effects.</li>\r\n</ul>\r\n<strong>Objective (s):</strong>\r\n\r\n<ul>\r\n	<li>To implement, monitor and promote the environmental friendly activities and impose the enforcement activities.</li>\r\n	<li>To outreach the concept of environmental management in local level.</li>\r\n	<li>To create environment friendly human activities and development process based on the concept of green development.</li>\r\n	<li>To minimize urban and rural pollution so as to protect the environment.</li>\r\n	<li>To minimize, acclimatize and review the adverse impacts of climate change.</li>\r\n	<li>To follow the low carbon path.</li>\r\n	<li>To enhance the co-operation and collaboration with national, international and Inter-governmental organizations.</li>\r\n</ul>\r\n<strong>Basic Policies</strong>\r\n\r\n<ul>\r\n	<li>Institutional and human capacity development and strengthening of mechanism related to environment legislations.</li>\r\n	<li>Environment promotional activities to create public awareness and to disclose information.</li>\r\n	<li>Regulation and prevention of environmental pollution.</li>\r\n	<li>Effective implementation of compliance monitoring in environment administration.</li>\r\n	<li>Preservation of natural resources and biodiversity.</li>\r\n	<li>Capacities build up to face climate change impacts and environment related problems.</li>\r\n	<li>Emphasis on local level planning, program selection and implementation to conserve environment and prevent pollution.</li>\r\n</ul>\r\n<strong>Main Activities (Functions)</strong>\r\n\r\n<ul>\r\n	<li>Planning, implementing, monitoring and enforcement of the environmental activities within the frame work of the Environment Protection Act (1997) and Environment Protection Regulation (1997), standards, guidelines and Nepal Governments&#39; law and rule.</li>\r\n	<li>Promotion of the environmental activities in line of the low carbon path.</li>\r\n	<li>Compliance monitoring of the environmental related activities.</li>\r\n	<li>Conduct activities in harmony of the Stockholm convention, Basel convention, Rotterdam convention, Montreal protocol, Kyoto protocol and in line of the treaties and commitments as expressed by the Government.</li>\r\n	<li>Implement activities related to climate change adaptation in different sectors including agriculture, forestry and related fields.</li>\r\n	<li>Monitor environmental parameters in different sectors such as industrial corridors, hospitals, factories and similar agencies.</li>\r\n	<li>Monitoring hazardous chemical pesticides and recommendation for punishment to the defaulters.</li>\r\n	<li>Conduct Environmental Audit for ensuring effective implementation of Environment Management Plan of different sectors.</li>\r\n	<li>Participate in the Environment Impact Assessment (EIA) process with related to industries, factories, hydropower plants and related areas.</li>\r\n	<li>Monitor quality of the air, water, noise and soils by the enforcement of law.</li>\r\n	<li>Launching environment related promotional activities.</li>\r\n</ul>\r\n', '<strong>Background (About US)</strong>\r\n<div style="text-align: justify;">Protection of human health through preserving our lovely planet is one of the primary obligations for all the states. Environment is a cross-cutting issue which covers the total of all surroundings of a living organism, including natural forces and other living things. In present days, the promotion of environmental friendly activities through awareness and implementation as well as enforcement to the concerned agencies has becoming widely realized interventions.<br />\r\nEnvironmental degradation and global warming has becoming widespread concerns and Nepal is no exception. Elsewhere the climate change has becoming buzz word and its impact on sectoral issues mainly in agriculture, forest; water resources and threatening livelihood of the people are to be addressed largely. Both anthropogenic as well as natural factors have triggered these issues. In fact they are interrelated process to each other which should be taken into well consideration while planning the adaptation and mitigation programs. In addition to these issues, pollution related to air, water, soil, noise and municipal wastages have becoming primary environmental concerns in Nepal. Their apparent effects are largely realized from policy level to the implementation levels. In order to minimize the problems, both legal and implementation aspects should be made stronger within the framework of the Government Policy, Act, Regulations, Standards and Guidelines. The former issues can be addressed at the higher level, whereas the later issues through the implementation level by the Departments and organizations working in the grass root level. In view of this effect, a functional arm of the Ministry with the mandate for implementation, monitoring and enforcement of the environmental activities in Nepal was realized since long time. In addition to the Environment Protection Act (1997) and Environment Protection Rules (1997), the Interim Constitution of Nepal (2007, Article 16) has also emphasized on the right to live in a healthy environment.<br />\r\nTo outreach the concept of environmental management in grass root level, to resolve the problems created by climate change and due to anthropogenic factor, to coordinate between governmental, non-governmental and private organizations and to effective monitoring of environmental management, Government of Nepal established the Department of Environment (DoE) in 27 July 2012 (As of 12 Shrawan 2069 BS) under the Ministry of Science, Technology and Environment (MoSTE). As per the Secretary level decision in 5 March 2013, (As of 22 Phalgun 2069 BS) Department was formally opened in Information Technology (IT), Park, Panauti, Kavre District. It was a mean time adjustment until having its office in Kathmandu. As a result of the difficulties to cope the work load with growing numbers of stakeholders&#39; request, the Department finally moved to Kupandole, Lalitpur District by the Minister level decision on 28 October 2013 (As of 11 Kartik 2070 BS). Ever since of its establishment, it has shown its presence in the national and international level. It is widely believed that the Department will be an instrumental in dealing the environmental related issues and maintaining and enhancing the quality environment for the descent life and livelihood through promotional and enforcement related efforts.</div>\r\n<strong>Long-term vision (Vision)</strong>\r\n\r\n<ul>\r\n	<li>To upscale and out-scale the concept of environmental management in grass root level and to create hassle free environment.</li>\r\n	<li>To aid in achieving sustainable development by the wise use of natural resources and arriving at an optimal balance between environment and economy.</li>\r\n	<li>To contribute towards the sustainable society by developing the conducive environment against climate induced challenges and anthropogenic effects.</li>\r\n</ul>\r\n<strong>Objective (s):</strong>\r\n\r\n<ul>\r\n	<li>To implement, monitor and promote the environmental friendly activities and impose the enforcement activities.</li>\r\n	<li>To outreach the concept of environmental management in local level.</li>\r\n	<li>To create environment friendly human activities and development process based on the concept of green development.</li>\r\n	<li>To minimize urban and rural pollution so as to protect the environment.</li>\r\n	<li>To minimize, acclimatize and review the adverse impacts of climate change.</li>\r\n	<li>To follow the low carbon path.</li>\r\n	<li>To enhance the co-operation and collaboration with national, international and Inter-governmental organizations.</li>\r\n</ul>\r\n<strong>Basic Policies</strong>\r\n\r\n<ul>\r\n	<li>Institutional and human capacity development and strengthening of mechanism related to environment legislations.</li>\r\n	<li>Environment promotional activities to create public awareness and to disclose information.</li>\r\n	<li>Regulation and prevention of environmental pollution.</li>\r\n	<li>Effective implementation of compliance monitoring in environment administration.</li>\r\n	<li>Preservation of natural resources and biodiversity.</li>\r\n	<li>Capacities build up to face climate change impacts and environment related problems.</li>\r\n	<li>Emphasis on local level planning, program selection and implementation to conserve environment and prevent pollution.</li>\r\n</ul>\r\n<strong>Main Activities (Functions)</strong>\r\n\r\n<ul>\r\n	<li>Planning, implementing, monitoring and enforcement of the environmental activities within the frame work of the Environment Protection Act (1997) and Environment Protection Regulation (1997), standards, guidelines and Nepal Governments&#39; law and rule.</li>\r\n	<li>Promotion of the environmental activities in line of the low carbon path.</li>\r\n	<li>Compliance monitoring of the environmental related activities.</li>\r\n	<li>Conduct activities in harmony of the Stockholm convention, Basel convention, Rotterdam convention, Montreal protocol, Kyoto protocol and in line of the treaties and commitments as expressed by the Government.</li>\r\n	<li>Implement activities related to climate change adaptation in different sectors including agriculture, forestry and related fields.</li>\r\n	<li>Monitor environmental parameters in different sectors such as industrial corridors, hospitals, factories and similar agencies.</li>\r\n	<li>Monitoring hazardous chemical pesticides and recommendation for punishment to the defaulters.</li>\r\n	<li>Conduct Environmental Audit for ensuring effective implementation of Environment Management Plan of different sectors.</li>\r\n	<li>Participate in the Environment Impact Assessment (EIA) process with related to industries, factories, hydropower plants and related areas.</li>\r\n	<li>Monitor quality of the air, water, noise and soils by the enforcement of law.</li>\r\n	<li>Launching environment related promotional activities.</li>\r\n</ul>\r\n', 'Normal Group', 20, 'no', '2015-04-07', '', 'normal', 'No', '', '', '', '', '', ''),
+(338, 'हाम्रो बारेमा', 'About Us', 'about-us', 'Header', 0, 'Protection of human health through preserving our lovely planet is one of the primary obligations for all the states. Environment is a cross-cutting issue which covers the total of all surroundings of a living organism, including natural forces and other living things. In present days, the promotion of environmental friendly activities through awareness and implementation as well as enforcement to the concerned agencies has becoming widely realized interventions.', 'Protection of human health through preserving our lovely planet is one of the primary obligations for all the states. Environment is a cross-cutting issue which covers the total of all surroundings of a living organism, including natural forces and other living things. In present days, the promotion of environmental friendly activities through awareness and implementation as well as enforcement to the concerned agencies has becoming widely realized interventions.', '<strong>Background (About US)</strong>\r\n<div style="text-align: justify;">Protection of human health through preserving our lovely planet is one of the primary obligations for all the states. Environment is a cross-cutting issue which covers the total of all surroundings of a living organism, including natural forces and other living things. In present days, the promotion of environmental friendly activities through awareness and implementation as well as enforcement to the concerned agencies has becoming widely realized interventions.<br />\r\nEnvironmental degradation and global warming has becoming widespread concerns and Nepal is no exception. Elsewhere the climate change has becoming buzz word and its impact on sectoral issues mainly in agriculture, forest; water resources and threatening livelihood of the people are to be addressed largely. Both anthropogenic as well as natural factors have triggered these issues. In fact they are interrelated process to each other which should be taken into well consideration while planning the adaptation and mitigation programs. In addition to these issues, pollution related to air, water, soil, noise and municipal wastages have becoming primary environmental concerns in Nepal. Their apparent effects are largely realized from policy level to the implementation levels. In order to minimize the problems, both legal and implementation aspects should be made stronger within the framework of the Government Policy, Act, Regulations, Standards and Guidelines. The former issues can be addressed at the higher level, whereas the later issues through the implementation level by the Departments and organizations working in the grass root level. In view of this effect, a functional arm of the Ministry with the mandate for implementation, monitoring and enforcement of the environmental activities in Nepal was realized since long time. In addition to the Environment Protection Act (1997) and Environment Protection Rules (1997), the Interim Constitution of Nepal (2007, Article 16) has also emphasized on the right to live in a healthy environment.<br />\r\nTo outreach the concept of environmental management in grass root level, to resolve the problems created by climate change and due to anthropogenic factor, to coordinate between governmental, non-governmental and private organizations and to effective monitoring of environmental management, Government of Nepal established the Department of Environment (DoE) in 27 July 2012 (As of 12 Shrawan 2069 BS) under the Ministry of Science, Technology and Environment (MoSTE). As per the Secretary level decision in 5 March 2013, (As of 22 Phalgun 2069 BS) Department was formally opened in Information Technology (IT), Park, Panauti, Kavre District. It was a mean time adjustment until having its office in Kathmandu. As a result of the difficulties to cope the work load with growing numbers of stakeholders&#39; request, the Department finally moved to Kupandole, Lalitpur District by the Minister level decision on 28 October 2013 (As of 11 Kartik 2070 BS). Ever since of its establishment, it has shown its presence in the national and international level. It is widely believed that the Department will be an instrumental in dealing the environmental related issues and maintaining and enhancing the quality environment for the descent life and livelihood through promotional and enforcement related efforts.</div>\r\n<strong>Long-term vision (Vision)</strong>\r\n\r\n<ul>\r\n	<li>To upscale and out-scale the concept of environmental management in grass root level and to create hassle free environment.</li>\r\n	<li>To aid in achieving sustainable development by the wise use of natural resources and arriving at an optimal balance between environment and economy.</li>\r\n	<li>To contribute towards the sustainable society by developing the conducive environment against climate induced challenges and anthropogenic effects.</li>\r\n</ul>\r\n<strong>Objective (s):</strong>\r\n\r\n<ul>\r\n	<li>To implement, monitor and promote the environmental friendly activities and impose the enforcement activities.</li>\r\n	<li>To outreach the concept of environmental management in local level.</li>\r\n	<li>To create environment friendly human activities and development process based on the concept of green development.</li>\r\n	<li>To minimize urban and rural pollution so as to protect the environment.</li>\r\n	<li>To minimize, acclimatize and review the adverse impacts of climate change.</li>\r\n	<li>To follow the low carbon path.</li>\r\n	<li>To enhance the co-operation and collaboration with national, international and Inter-governmental organizations.</li>\r\n</ul>\r\n<strong>Basic Policies</strong>\r\n\r\n<ul>\r\n	<li>Institutional and human capacity development and strengthening of mechanism related to environment legislations.</li>\r\n	<li>Environment promotional activities to create public awareness and to disclose information.</li>\r\n	<li>Regulation and prevention of environmental pollution.</li>\r\n	<li>Effective implementation of compliance monitoring in environment administration.</li>\r\n	<li>Preservation of natural resources and biodiversity.</li>\r\n	<li>Capacities build up to face climate change impacts and environment related problems.</li>\r\n	<li>Emphasis on local level planning, program selection and implementation to conserve environment and prevent pollution.</li>\r\n</ul>\r\n<strong>Main Activities (Functions)</strong>\r\n\r\n<ul>\r\n	<li>Planning, implementing, monitoring and enforcement of the environmental activities within the frame work of the Environment Protection Act (1997) and Environment Protection Regulation (1997), standards, guidelines and Nepal Governments&#39; law and rule.</li>\r\n	<li>Promotion of the environmental activities in line of the low carbon path.</li>\r\n	<li>Compliance monitoring of the environmental related activities.</li>\r\n	<li>Conduct activities in harmony of the Stockholm convention, Basel convention, Rotterdam convention, Montreal protocol, Kyoto protocol and in line of the treaties and commitments as expressed by the Government.</li>\r\n	<li>Implement activities related to climate change adaptation in different sectors including agriculture, forestry and related fields.</li>\r\n	<li>Monitor environmental parameters in different sectors such as industrial corridors, hospitals, factories and similar agencies.</li>\r\n	<li>Monitoring hazardous chemical pesticides and recommendation for punishment to the defaulters.</li>\r\n	<li>Conduct Environmental Audit for ensuring effective implementation of Environment Management Plan of different sectors.</li>\r\n	<li>Participate in the Environment Impact Assessment (EIA) process with related to industries, factories, hydropower plants and related areas.</li>\r\n	<li>Monitor quality of the air, water, noise and soils by the enforcement of law.</li>\r\n	<li>Launching environment related promotional activities.</li>\r\n</ul>\r\n', '<strong>Background (About US)</strong>\r\n<div style="text-align: justify;">Protection of human health through preserving our lovely planet is one of the primary obligations for all the states. Environment is a cross-cutting issue which covers the total of all surroundings of a living organism, including natural forces and other living things. In present days, the promotion of environmental friendly activities through awareness and implementation as well as enforcement to the concerned agencies has becoming widely realized interventions.<br />\r\nEnvironmental degradation and global warming has becoming widespread concerns and Nepal is no exception. Elsewhere the climate change has becoming buzz word and its impact on sectoral issues mainly in agriculture, forest; water resources and threatening livelihood of the people are to be addressed largely. Both anthropogenic as well as natural factors have triggered these issues. In fact they are interrelated process to each other which should be taken into well consideration while planning the adaptation and mitigation programs. In addition to these issues, pollution related to air, water, soil, noise and municipal wastages have becoming primary environmental concerns in Nepal. Their apparent effects are largely realized from policy level to the implementation levels. In order to minimize the problems, both legal and implementation aspects should be made stronger within the framework of the Government Policy, Act, Regulations, Standards and Guidelines. The former issues can be addressed at the higher level, whereas the later issues through the implementation level by the Departments and organizations working in the grass root level. In view of this effect, a functional arm of the Ministry with the mandate for implementation, monitoring and enforcement of the environmental activities in Nepal was realized since long time. In addition to the Environment Protection Act (1997) and Environment Protection Rules (1997), the Interim Constitution of Nepal (2007, Article 16) has also emphasized on the right to live in a healthy environment.<br />\r\nTo outreach the concept of environmental management in grass root level, to resolve the problems created by climate change and due to anthropogenic factor, to coordinate between governmental, non-governmental and private organizations and to effective monitoring of environmental management, Government of Nepal established the Department of Environment (DoE) in 27 July 2012 (As of 12 Shrawan 2069 BS) under the Ministry of Science, Technology and Environment (MoSTE). As per the Secretary level decision in 5 March 2013, (As of 22 Phalgun 2069 BS) Department was formally opened in Information Technology (IT), Park, Panauti, Kavre District. It was a mean time adjustment until having its office in Kathmandu. As a result of the difficulties to cope the work load with growing numbers of stakeholders&#39; request, the Department finally moved to Kupandole, Lalitpur District by the Minister level decision on 28 October 2013 (As of 11 Kartik 2070 BS). Ever since of its establishment, it has shown its presence in the national and international level. It is widely believed that the Department will be an instrumental in dealing the environmental related issues and maintaining and enhancing the quality environment for the descent life and livelihood through promotional and enforcement related efforts.</div>\r\n<strong>Long-term vision (Vision)</strong>\r\n\r\n<ul>\r\n	<li>To upscale and out-scale the concept of environmental management in grass root level and to create hassle free environment.</li>\r\n	<li>To aid in achieving sustainable development by the wise use of natural resources and arriving at an optimal balance between environment and economy.</li>\r\n	<li>To contribute towards the sustainable society by developing the conducive environment against climate induced challenges and anthropogenic effects.</li>\r\n</ul>\r\n<strong>Objective (s):</strong>\r\n\r\n<ul>\r\n	<li>To implement, monitor and promote the environmental friendly activities and impose the enforcement activities.</li>\r\n	<li>To outreach the concept of environmental management in local level.</li>\r\n	<li>To create environment friendly human activities and development process based on the concept of green development.</li>\r\n	<li>To minimize urban and rural pollution so as to protect the environment.</li>\r\n	<li>To minimize, acclimatize and review the adverse impacts of climate change.</li>\r\n	<li>To follow the low carbon path.</li>\r\n	<li>To enhance the co-operation and collaboration with national, international and Inter-governmental organizations.</li>\r\n</ul>\r\n<strong>Basic Policies</strong>\r\n\r\n<ul>\r\n	<li>Institutional and human capacity development and strengthening of mechanism related to environment legislations.</li>\r\n	<li>Environment promotional activities to create public awareness and to disclose information.</li>\r\n	<li>Regulation and prevention of environmental pollution.</li>\r\n	<li>Effective implementation of compliance monitoring in environment administration.</li>\r\n	<li>Preservation of natural resources and biodiversity.</li>\r\n	<li>Capacities build up to face climate change impacts and environment related problems.</li>\r\n	<li>Emphasis on local level planning, program selection and implementation to conserve environment and prevent pollution.</li>\r\n</ul>\r\n<strong>Main Activities (Functions)</strong>\r\n\r\n<ul>\r\n	<li>Planning, implementing, monitoring and enforcement of the environmental activities within the frame work of the Environment Protection Act (1997) and Environment Protection Regulation (1997), standards, guidelines and Nepal Governments&#39; law and rule.</li>\r\n	<li>Promotion of the environmental activities in line of the low carbon path.</li>\r\n	<li>Compliance monitoring of the environmental related activities.</li>\r\n	<li>Conduct activities in harmony of the Stockholm convention, Basel convention, Rotterdam convention, Montreal protocol, Kyoto protocol and in line of the treaties and commitments as expressed by the Government.</li>\r\n	<li>Implement activities related to climate change adaptation in different sectors including agriculture, forestry and related fields.</li>\r\n	<li>Monitor environmental parameters in different sectors such as industrial corridors, hospitals, factories and similar agencies.</li>\r\n	<li>Monitoring hazardous chemical pesticides and recommendation for punishment to the defaulters.</li>\r\n	<li>Conduct Environmental Audit for ensuring effective implementation of Environment Management Plan of different sectors.</li>\r\n	<li>Participate in the Environment Impact Assessment (EIA) process with related to industries, factories, hydropower plants and related areas.</li>\r\n	<li>Monitor quality of the air, water, noise and soils by the enforcement of law.</li>\r\n	<li>Launching environment related promotional activities.</li>\r\n</ul>\r\n', 'Normal Group', 20, 'no', '2015-04-07', '', 'normal', 'No', '', '', '', '', '', ''),
 (373, '&#2349;&#2367;&#2337;&#2367;&#2351;&#2379;', 'Official-Video', 'youtube', 'Other', 0, '', '', 'https://www.youtube.com/embed/sw0jlvkH9KA', '', 'Link', 140, 'no', '2016-06-15', '', 'normal', 'No', '', '', '', '', '', ''),
 (274, 'महानिर्देशकको संदेश', 'Message from DG', 'message-from-dg', 'Other', 0, '<strong>दुर्गा प्रसाद दवाडी<br />\r\nमहानिर्देशक</strong>', '<strong>Durga Prasad Dawadi<br />\r\nDirector General</strong>', '<p style="text-align:justify">On the behalf of Department of Environment, I would like to welcome you all to our official website.<br />\r\n<br />\r\nEstablished with the motive of environment protection and sustainable development, the department has been constantly focusing on improving the environmental condition of the country. The department works under the Ministry of Population and Environment and is responsible for the implementation of environmental acts and regulations. It oversees the compliance of Environmental Protection Act (EPA), 2053, Environment Protection Regulation (EPR), 2054 and pollution control standard as promulgated by the Government of Nepal. The department has been playing crucial role in assisting the ministry in formulating plans and policies.<br />\r\n&nbsp;<br />\r\nThe department has been established with the cabinet decision of 12th Shrawan 2069 and has been on constant endeavor to fulfill the mandate. The department has a team of staff who expertise on different discipline. Centrally located, it lacks its supportive organization at local level. However, it has been monitoring the industries and projects all over the country and also supporting for environmental impact adaptation. &nbsp;<br />\r\n&nbsp;<br />\r\nWe have to meet the targets for millennium development goal and achieve that in sustainable way. So our program is focused on different smart activities, like Water smart, Carbon and Energy smart, Agriculture smart, Biodiversity smart, Knowledge smart activities for achievement our goals.<br />\r\n&nbsp;<br />\r\nOn my leadership, the department will continuously strive to improve the environmental status of the country. We welcome for the coordination, collaboration and support from all the stakeholders, government agencies, academic institutes, I/NGOs and environment related organizations to achieve the goal of sound environment management. We expect your support on attaining our right to healthy environment.<br />\r\n&nbsp;<br />\r\nWe hope, the information provided in the website will be useful to all the information seekers. Thank you for visiting our website.</p>\r\n\r\n<p>&nbsp;<br />\r\nDurga Prasad Dawadi<br />\r\n<strong>Director General </strong><br />\r\nDepartment of Environment<br />\r\nKupondole, Lalitpur<br />\r\n&nbsp;<br />\r\nTelephone: +977-1-5553690<br />\r\nFax: (++) + 977-1-5551149<br />\r\nEmail: durgadawadi45@gmail.com , info@doenv.gov.np<br />\r\nWebsite: www.doenv.gov.np, www.pollution.gov.np<br />\r\n&nbsp;</p>\r\n', '<p style="text-align:justify">On the behalf of Department of Environment, I would like to welcome you all to our official website.<br />\r\n<br />\r\nEstablished with the motive of environment protection and sustainable development, the department has been constantly focusing on improving the environmental condition of the country. The department works under the Ministry of Population and Environment and is responsible for the implementation of environmental acts and regulations. It oversees the compliance of Environmental Protection Act (EPA), 2053, Environment Protection Regulation (EPR), 2054 and pollution control standard as promulgated by the Government of Nepal. The department has been playing crucial role in assisting the ministry in formulating plans and policies.<br />\r\n&nbsp;<br />\r\nThe department has been established with the cabinet decision of 12th Shrawan 2069 and has been on constant endeavor to fulfill the mandate. The department has a team of staff who expertise on different discipline. Centrally located, it lacks its supportive organization at local level. However, it has been monitoring the industries and projects all over the country and also supporting for environmental impact adaptation. &nbsp;<br />\r\n&nbsp;<br />\r\nWe have to meet the targets for millennium development goal and achieve that in sustainable way. So our program is focused on different smart activities, like Water smart, Carbon and Energy smart, Agriculture smart, Biodiversity smart, Knowledge smart activities for achievement our goals.<br />\r\n&nbsp;<br />\r\nOn my leadership, the department will continuously strive to improve the environmental status of the country. We welcome for the coordination, collaboration and support from all the stakeholders, government agencies, academic institutes, I/NGOs and environment related organizations to achieve the goal of sound environment management. We expect your support on attaining our right to healthy environment.<br />\r\n&nbsp;<br />\r\nWe hope, the information provided in the website will be useful to all the information seekers. Thank you for visiting our website.</p>\r\n\r\n<p>&nbsp;<br />\r\nDurga Prasad Dawadi<br />\r\n<strong>Director General </strong><br />\r\nDepartment of Environment<br />\r\nKupondole, Lalitpur<br />\r\n&nbsp;<br />\r\nTelephone: +977-1-5553690<br />\r\nFax: (++) + 977-1-5551149<br />\r\nEmail: durgadawadi45@gmail.com , info@doenv.gov.np<br />\r\nWebsite: www.doenv.gov.np, www.pollution.gov.np<br />\r\n&nbsp;</p>\r\n', 'Contents Page', 30, 'no', '2014-04-22', 'DG.jpg', 'normal', 'No', '', '', '', '', '', ''),
 (723, 'वायु प्रदुषण मापन केन्रद्र (Slider)', 'Air Quality Monitoring Station ', 'slider', 'Other', 0, '', '', '', '', 'Gallery', 170, 'no', '2017-04-03', '404.php', 'normal', 'No', '', '', '', '', '', ''),
@@ -365,13 +391,12 @@ INSERT INTO `groups` (`id`, `name`, `nameen`, `urlname`, `type`, `parentId`, `sh
 --
 
 CREATE TABLE IF NOT EXISTS `listingfiles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `caption` text NOT NULL,
   `filename` varchar(255) NOT NULL DEFAULT '',
   `listingId` int(11) NOT NULL DEFAULT '0',
-  `onDate` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=122 ;
+  `onDate` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=122 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `listingfiles`
@@ -485,13 +510,45 @@ INSERT INTO `listingfiles` (`id`, `caption`, `filename`, `listingId`, `onDate`) 
 --
 
 CREATE TABLE IF NOT EXISTS `region` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `onDate` date NOT NULL,
   `publish` varchar(3) NOT NULL,
-  `weight` int(10) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `weight` int(10) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `region`
+--
+
+INSERT INTO `region` (`id`, `name`, `onDate`, `publish`, `weight`) VALUES
+(5, 'test region1', '2017-12-27', 'No', 10),
+(6, 'test region 2', '2017-12-26', 'Yes', 20),
+(7, 'Test region 3', '2017-12-26', 'Yes', 30);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rel_father`
+--
+
+CREATE TABLE IF NOT EXISTS `rel_father` (
+`id` int(30) NOT NULL,
+  `memberId` int(30) NOT NULL,
+  `fatherId` int(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rel_mother`
+--
+
+CREATE TABLE IF NOT EXISTS `rel_mother` (
+`id` int(30) NOT NULL,
+  `memberId` int(30) NOT NULL,
+  `motherId` int(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -500,15 +557,14 @@ CREATE TABLE IF NOT EXISTS `region` (
 --
 
 CREATE TABLE IF NOT EXISTS `testimonials` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+`id` int(10) NOT NULL,
   `image` varchar(250) NOT NULL DEFAULT '',
   `name` varchar(250) NOT NULL DEFAULT '',
   `address` varchar(250) NOT NULL,
   `comments` text NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
-  `onDate` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `onDate` date NOT NULL DEFAULT '0000-00-00'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -517,7 +573,7 @@ CREATE TABLE IF NOT EXISTS `testimonials` (
 --
 
 CREATE TABLE IF NOT EXISTS `usergroups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -526,9 +582,8 @@ CREATE TABLE IF NOT EXISTS `usergroups` (
   `phone` int(20) NOT NULL,
   `publish` varchar(3) NOT NULL,
   `weight` int(10) NOT NULL,
-  `onDate` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
+  `onDate` date NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `usergroups`
@@ -546,23 +601,187 @@ INSERT INTO `usergroups` (`id`, `name`, `username`, `password`, `email`, `addres
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`id` int(10) unsigned NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `lastLogin` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `loginTimes` int(10) unsigned NOT NULL DEFAULT '0',
   `status` enum('A','D') NOT NULL DEFAULT 'D',
-  `userGroupId` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `userGroupId` int(10) unsigned NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `lastLogin`, `loginTimes`, `status`, `userGroupId`) VALUES
-(1, 'admin', 'chapagain_123_#', '2017-12-19 19:47:09', 477, 'A', 1),
+(1, 'admin', 'chapagain_123_#', '2017-12-27 12:11:37', 479, 'A', 1),
 (2, 'manager', 'manager', '2017-01-12 21:32:00', 36, 'A', 2);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `district`
+--
+ALTER TABLE `district`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `family`
+--
+ALTER TABLE `family`
+ ADD PRIMARY KEY (`id`), ADD KEY `gotraId` (`gotraId`), ADD KEY `regionId` (`regionId`);
+
+--
+-- Indexes for table `feedbacks`
+--
+ALTER TABLE `feedbacks`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `gotra`
+--
+ALTER TABLE `gotra`
+ ADD PRIMARY KEY (`id`), ADD KEY `id` (`id`);
+
+--
+-- Indexes for table `groups`
+--
+ALTER TABLE `groups`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `urlname` (`urlname`);
+
+--
+-- Indexes for table `listingfiles`
+--
+ALTER TABLE `listingfiles`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `region`
+--
+ALTER TABLE `region`
+ ADD PRIMARY KEY (`id`), ADD KEY `id` (`id`);
+
+--
+-- Indexes for table `rel_father`
+--
+ALTER TABLE `rel_father`
+ ADD PRIMARY KEY (`id`), ADD KEY `fatherId` (`fatherId`), ADD KEY `memberId` (`memberId`);
+
+--
+-- Indexes for table `rel_mother`
+--
+ALTER TABLE `rel_mother`
+ ADD PRIMARY KEY (`id`), ADD KEY `motherId` (`motherId`), ADD KEY `memberId` (`memberId`);
+
+--
+-- Indexes for table `testimonials`
+--
+ALTER TABLE `testimonials`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `usergroups`
+--
+ALTER TABLE `usergroups`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `district`
+--
+ALTER TABLE `district`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=80;
+--
+-- AUTO_INCREMENT for table `family`
+--
+ALTER TABLE `family`
+MODIFY `id` int(30) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `feedbacks`
+--
+ALTER TABLE `feedbacks`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `gotra`
+--
+ALTER TABLE `gotra`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `groups`
+--
+ALTER TABLE `groups`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=833;
+--
+-- AUTO_INCREMENT for table `listingfiles`
+--
+ALTER TABLE `listingfiles`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=122;
+--
+-- AUTO_INCREMENT for table `region`
+--
+ALTER TABLE `region`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `rel_father`
+--
+ALTER TABLE `rel_father`
+MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `rel_mother`
+--
+ALTER TABLE `rel_mother`
+MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `testimonials`
+--
+ALTER TABLE `testimonials`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `usergroups`
+--
+ALTER TABLE `usergroups`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=62;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `family`
+--
+ALTER TABLE `family`
+ADD CONSTRAINT `gotraFamilyId` FOREIGN KEY (`gotraId`) REFERENCES `gotra` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `regionFamilyId` FOREIGN KEY (`regionId`) REFERENCES `region` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rel_father`
+--
+ALTER TABLE `rel_father`
+ADD CONSTRAINT `rel_father_fatherId` FOREIGN KEY (`fatherId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `rel_father_memberId` FOREIGN KEY (`memberId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `rel_mother`
+--
+ALTER TABLE `rel_mother`
+ADD CONSTRAINT `rel_mother_memberId` FOREIGN KEY (`memberId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+ADD CONSTRAINT `rel_mother_motherId` FOREIGN KEY (`motherId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
