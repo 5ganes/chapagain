@@ -47,8 +47,8 @@
   // }
 
   if($_GET['type']=="del"){
-      $gotra -> delete($_GET['id']);
-      header("Location:gotra.php?msg=Gotra deleted successfully.");   
+      $delMsg = $gotra -> delete($_GET['id']);
+      header("Location:gotra.php?msg=".$delMsg);   
   }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -184,7 +184,7 @@
                                       <td valign="top"><?= $row['weight'] ?></td>
                                       <td valign="top">
                                         [ <a href="gotra.php?type=edit&id=<?= $row['id']?>">Edit</a> | 
-                                          <a href="#" onClick="javascript: if(confirm('This will permanently remove this region from database. Continue?')){
+                                          <a href="#" onClick="javascript: if(confirm('This will permanently remove this gotra from database. Continue?')){
                                            document.location='gotra.php?type=del&id=<?php echo $row['id']; ?>'; }">Delete</a> ]
                                     </td>
                                   </tr>

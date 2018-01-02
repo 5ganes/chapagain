@@ -47,8 +47,8 @@
   // }
 
   if($_GET['type']=="del"){
-      $region -> delete($_GET['id']);
-      header("Location:region.php?msg=Region deleted successfully.");   
+      $delMsg = $region -> delete($_GET['id']);
+      header("Location:region.php?msg=".$delMsg);   
   }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

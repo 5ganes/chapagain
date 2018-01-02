@@ -22,11 +22,20 @@ class Region{
 	function delete($id)
 	{  
 		global $conn;
+		global $family;
 		
 		$id = cleanQuery($id);
-	
-		$sql = "DELETE FROM region WHERE id = '$id'";
-		$conn->exec($sql);
+		
+		//get members if exist
+		if($family->getMemberCountByRegion($id) > 0){
+			$msg = 'Region can not be deleted because there are members under it.';
+		}
+		else{
+			$sql = "DELETE FROM region WHERE id = '$id'";
+			$conn->exec($sql);
+			$msg = 'Region deleted successfully';
+		}
+		return $msg;
 	}
 	
 	function getAll(){

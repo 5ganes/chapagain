@@ -4,12 +4,11 @@
     header("Location: login.php");
     exit();
   }
-  if(isset($_POST['id']))
-    $id = $_POST['id'];
-  elseif(isset($_GET['id']))
-    $id = $_GET['id'];
-  else
-    $id = 0;
+  if(isset($_POST['id'])) $id = $_POST['id'];
+  elseif(isset($_GET['id'])) $id = $_GET['id'];
+  else $id = 0;
+
+  if($_GET['page']) $page = $_GET['page'];
       
   $weight = $family -> getLastWeight();
   if($_GET['type'] == "edit"){
@@ -113,9 +112,16 @@
                               <select name="fatherId">
                                 <option value="select">Select One</option>
                                 <?php
-                                $father = $family->getAll();
+                                $sql = "SELECT f2.id as fatherId FROM 
+                                                          family as f1 
+                                                        join rel_father as rf on f1.id=rf.memberId
+                                                        join family as f2 on rf.fatherId = f2.id
+                                                      where 
+                                                        f1.id = '$id'";
+                                $oldFather = $conn->fetchArray($conn->exec($sql));
+                                $father = $family->getAllMales();
                                 while($record = $conn->fetchArray($father)) {?>
-                                  <option value="<?=$record['id'];?>" <?php if($fatherId==$record['id']) echo 'selected'?>><?=$record['name']?></option>
+                                  <option value="<?=$record['id'];?>" <?php if($oldFather['fatherId']==$record['id']) echo 'selected'?>><?=$record['name']?></option>
                                 <?php }
                                 ?>
                               </select>
@@ -130,9 +136,16 @@
                               <select name="motherId">
                                 <option value="select">Select One</option>
                                 <?php
-                                $mother = $family->getAll();
+                                $sql = "SELECT f2.id as motherId FROM 
+                                                          family as f1 
+                                                        join rel_mother as rf on f1.id=rf.memberId
+                                                        join family as f2 on rf.motherId = f2.id
+                                                      where 
+                                                        f1.id = '$id'";
+                                $oldMother = $conn->fetchArray($conn->exec($sql));
+                                $mother = $family->getAllFemales();
                                 while($record = $conn->fetchArray($mother)) {?>
-                                  <option value="<?=$record['id'];?>" <?php if($motherId==$record['id']) echo 'selected'?>><?=$record['name']?></option>
+                                  <option value="<?=$record['id'];?>" <?php if($oldMother['motherId']==$record['id']) echo 'selected'?>><?=$record['name']?></option>
                                 <?php }
                                 ?>
                               </select>
@@ -309,7 +322,7 @@
                 
                   $counter = 0;
                   $pagename = "family.php?";
-                  $limit = 5;
+                  $limit = 3;
                   $sql = "SELECT 
                         family.id as id, family.name as name, email, gender, family.publish as publish, family.weight as weight FROM family";
                   $sql=$sql." ORDER BY weight ASC";
@@ -327,9 +340,9 @@
                             <td valign="top"><?= $row['publish'] ?></td>
                             <td valign="top"><?= $row['weight'] ?></td>
                             <td valign="top">
-                              [ <a href="family.php?type=edit&id=<?= $row['id']?>">Edit</a> | 
+                              [ <a href="family.php?page=<?php echo $page;?>&type=edit&id=<?= $row['id']?>">Edit</a> | 
                                 <a href="#" onClick="javascript: if(confirm('This will permanently remove this member from database. Continue?')){
-                                 document.location='family.php?type=del&id=<?php echo $row['id']; ?>'; }">Delete</a> ]
+                                 document.location='family.php?page=<?php echo $page;?>&type=del&id=<?php echo $row['id']; ?>'; }">Delete</a> ]
                             </td>
                         </tr>
                                 <? }?>

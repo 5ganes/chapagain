@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.0.9
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 31, 2017 at 07:17 AM
--- Server version: 5.6.21
--- PHP Version: 5.6.3
+-- Host: localhost
+-- Generation Time: Jan 02, 2018 at 03:20 अपराह्न
+-- Server version: 5.6.14
+-- PHP Version: 5.5.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,14 +27,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `district` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
   `code` varchar(20) NOT NULL,
   `ecozone` varchar(500) NOT NULL,
   `devregion` varchar(500) NOT NULL,
   `publish` varchar(3) NOT NULL,
-  `weight` int(10) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
+  `weight` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 --
 -- Dumping data for table `district`
@@ -124,7 +125,7 @@ INSERT INTO `district` (`id`, `name`, `code`, `ecozone`, `devregion`, `publish`,
 --
 
 CREATE TABLE IF NOT EXISTS `family` (
-`id` int(30) NOT NULL,
+  `id` int(30) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `birthDate` date NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -136,17 +137,22 @@ CREATE TABLE IF NOT EXISTS `family` (
   `image` varchar(255) NOT NULL,
   `publish` varchar(3) NOT NULL,
   `onDate` date NOT NULL,
-  `weight` int(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `weight` int(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `gotraId` (`gotraId`),
+  KEY `regionId` (`regionId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `family`
 --
 
 INSERT INTO `family` (`id`, `name`, `birthDate`, `email`, `phone`, `maritalStatus`, `gotraId`, `regionId`, `gender`, `image`, `publish`, `onDate`, `weight`) VALUES
-(2, 'Test Name Male', '2015-10-21', 'test@gmail.com', '76776787', 'Married', 10, 6, 'Male', 'Job_Search-512.png', 'Yes', '2017-12-28', 10),
-(3, 'Test Name Female', '2017-12-03', 'tsetfemale@gmail.com', '89989889', 'Married', 11, 7, 'Female', 'Leo.png', 'Yes', '2017-12-28', 20),
-(4, 'First Child Male', '2017-12-27', 'ch1@gmail.com', '8978799', 'Unmarried', 10, 6, 'Male', 'lions_logo.png', 'Yes', '2017-12-28', 30);
+(8, 'first father', '2018-01-11', 'fristfather@gmail.com', '98769867', 'Married', 9, 6, 'Male', '', 'Yes', '2018-01-02', 20),
+(9, 'Frist mother', '2018-01-30', 'firstmother@gmail.com', '8977878', 'Married', 9, 7, 'Female', '', 'Yes', '2018-01-02', 30),
+(13, 'first child male', '2018-01-03', 'gfgf', '456456', 'Married', 9, 6, 'Male', '', 'Yes', '2018-01-02', 40),
+(14, 'first child female', '2018-01-13', 'fsdfk@gmail.com', '5464565', 'Married', 9, 7, 'Female', '', 'Yes', '2018-01-02', 50),
+(15, 'ramesh Chaudhary', '0000-00-00', 'ramesh@gmail.com', '456456676', 'Married', 9, 6, 'Male', '', 'Yes', '2018-01-02', 60);
 
 -- --------------------------------------------------------
 
@@ -155,15 +161,16 @@ INSERT INTO `family` (`id`, `name`, `birthDate`, `email`, `phone`, `maritalStatu
 --
 
 CREATE TABLE IF NOT EXISTS `feedbacks` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `phone` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `subject` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `comment` text CHARACTER SET utf8,
-  `onDate` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+  `onDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `feedbacks`
@@ -181,12 +188,14 @@ INSERT INTO `feedbacks` (`id`, `name`, `address`, `phone`, `email`, `subject`, `
 --
 
 CREATE TABLE IF NOT EXISTS `gotra` (
-`id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `onDate` date NOT NULL,
   `publish` varchar(3) NOT NULL,
-  `weight` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+  `weight` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `gotra`
@@ -194,8 +203,7 @@ CREATE TABLE IF NOT EXISTS `gotra` (
 
 INSERT INTO `gotra` (`id`, `name`, `onDate`, `publish`, `weight`) VALUES
 (9, 'First gotra', '2017-12-26', 'Yes', 10),
-(10, 'Second gotra', '2017-12-26', 'Yes', 20),
-(11, 'Third gotra', '2017-12-26', 'Yes', 30);
+(13, 'Second Gotra', '2018-01-02', 'Yes', 20);
 
 -- --------------------------------------------------------
 
@@ -204,7 +212,7 @@ INSERT INTO `gotra` (`id`, `name`, `onDate`, `publish`, `weight`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `groups` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL DEFAULT '',
   `nameen` varchar(255) NOT NULL,
   `urlname` varchar(250) CHARACTER SET latin1 NOT NULL,
@@ -226,8 +234,10 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `pageTitle` text CHARACTER SET latin1 NOT NULL,
   `pageKeyword` text CHARACTER SET latin1 NOT NULL,
   `activity` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `publish` varchar(3) CHARACTER SET latin1 NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=833 DEFAULT CHARSET=utf8;
+  `publish` varchar(3) CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `urlname` (`urlname`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=833 ;
 
 --
 -- Dumping data for table `groups`
@@ -391,12 +401,13 @@ INSERT INTO `groups` (`id`, `name`, `nameen`, `urlname`, `type`, `parentId`, `sh
 --
 
 CREATE TABLE IF NOT EXISTS `listingfiles` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `caption` text NOT NULL,
   `filename` varchar(255) NOT NULL DEFAULT '',
   `listingId` int(11) NOT NULL DEFAULT '0',
-  `onDate` int(11) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM AUTO_INCREMENT=122 DEFAULT CHARSET=latin1;
+  `onDate` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=122 ;
 
 --
 -- Dumping data for table `listingfiles`
@@ -510,19 +521,20 @@ INSERT INTO `listingfiles` (`id`, `caption`, `filename`, `listingId`, `onDate`) 
 --
 
 CREATE TABLE IF NOT EXISTS `region` (
-`id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `onDate` date NOT NULL,
   `publish` varchar(3) NOT NULL,
-  `weight` int(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  `weight` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `region`
 --
 
 INSERT INTO `region` (`id`, `name`, `onDate`, `publish`, `weight`) VALUES
-(5, 'test region1', '2017-12-27', 'No', 10),
 (6, 'test region 2', '2017-12-26', 'Yes', 20),
 (7, 'Test region 3', '2017-12-26', 'Yes', 30);
 
@@ -533,10 +545,21 @@ INSERT INTO `region` (`id`, `name`, `onDate`, `publish`, `weight`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `rel_father` (
-`id` int(30) NOT NULL,
   `memberId` int(30) NOT NULL,
-  `fatherId` int(30) NOT NULL
+  `fatherId` int(30) NOT NULL,
+  PRIMARY KEY (`memberId`),
+  KEY `fatherId` (`fatherId`),
+  KEY `memberId` (`memberId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rel_father`
+--
+
+INSERT INTO `rel_father` (`memberId`, `fatherId`) VALUES
+(13, 8),
+(14, 8),
+(15, 13);
 
 -- --------------------------------------------------------
 
@@ -545,10 +568,21 @@ CREATE TABLE IF NOT EXISTS `rel_father` (
 --
 
 CREATE TABLE IF NOT EXISTS `rel_mother` (
-`id` int(30) NOT NULL,
   `memberId` int(30) NOT NULL,
-  `motherId` int(30) NOT NULL
+  `motherId` int(30) NOT NULL,
+  PRIMARY KEY (`memberId`),
+  KEY `motherId` (`motherId`),
+  KEY `memberId` (`memberId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rel_mother`
+--
+
+INSERT INTO `rel_mother` (`memberId`, `motherId`) VALUES
+(13, 9),
+(14, 9),
+(15, 14);
 
 -- --------------------------------------------------------
 
@@ -557,14 +591,15 @@ CREATE TABLE IF NOT EXISTS `rel_mother` (
 --
 
 CREATE TABLE IF NOT EXISTS `testimonials` (
-`id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `image` varchar(250) NOT NULL DEFAULT '',
   `name` varchar(250) NOT NULL DEFAULT '',
   `address` varchar(250) NOT NULL,
   `comments` text NOT NULL,
   `status` int(1) NOT NULL DEFAULT '0',
-  `onDate` date NOT NULL DEFAULT '0000-00-00'
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `onDate` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -573,7 +608,7 @@ CREATE TABLE IF NOT EXISTS `testimonials` (
 --
 
 CREATE TABLE IF NOT EXISTS `usergroups` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -582,8 +617,9 @@ CREATE TABLE IF NOT EXISTS `usergroups` (
   `phone` int(20) NOT NULL,
   `publish` varchar(3) NOT NULL,
   `weight` int(10) NOT NULL,
-  `onDate` date NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+  `onDate` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
 
 --
 -- Dumping data for table `usergroups`
@@ -601,163 +637,24 @@ INSERT INTO `usergroups` (`id`, `name`, `username`, `password`, `email`, `addres
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-`id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `lastLogin` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `loginTimes` int(10) unsigned NOT NULL DEFAULT '0',
   `status` enum('A','D') NOT NULL DEFAULT 'D',
-  `userGroupId` int(10) unsigned NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `userGroupId` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `lastLogin`, `loginTimes`, `status`, `userGroupId`) VALUES
-(1, 'admin', 'chapagain_123_#', '2017-12-27 12:11:37', 479, 'A', 1),
+(1, 'admin', 'chapagain_123_#', '2017-12-31 12:05:56', 480, 'A', 1),
 (2, 'manager', 'manager', '2017-01-12 21:32:00', 36, 'A', 2);
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `district`
---
-ALTER TABLE `district`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `family`
---
-ALTER TABLE `family`
- ADD PRIMARY KEY (`id`), ADD KEY `gotraId` (`gotraId`), ADD KEY `regionId` (`regionId`);
-
---
--- Indexes for table `feedbacks`
---
-ALTER TABLE `feedbacks`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `gotra`
---
-ALTER TABLE `gotra`
- ADD PRIMARY KEY (`id`), ADD KEY `id` (`id`);
-
---
--- Indexes for table `groups`
---
-ALTER TABLE `groups`
- ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `urlname` (`urlname`);
-
---
--- Indexes for table `listingfiles`
---
-ALTER TABLE `listingfiles`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `region`
---
-ALTER TABLE `region`
- ADD PRIMARY KEY (`id`), ADD KEY `id` (`id`);
-
---
--- Indexes for table `rel_father`
---
-ALTER TABLE `rel_father`
- ADD PRIMARY KEY (`id`), ADD KEY `fatherId` (`fatherId`), ADD KEY `memberId` (`memberId`);
-
---
--- Indexes for table `rel_mother`
---
-ALTER TABLE `rel_mother`
- ADD PRIMARY KEY (`id`), ADD KEY `motherId` (`motherId`), ADD KEY `memberId` (`memberId`);
-
---
--- Indexes for table `testimonials`
---
-ALTER TABLE `testimonials`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `usergroups`
---
-ALTER TABLE `usergroups`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
- ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `district`
---
-ALTER TABLE `district`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=80;
---
--- AUTO_INCREMENT for table `family`
---
-ALTER TABLE `family`
-MODIFY `id` int(30) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `feedbacks`
---
-ALTER TABLE `feedbacks`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT for table `gotra`
---
-ALTER TABLE `gotra`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT for table `groups`
---
-ALTER TABLE `groups`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=833;
---
--- AUTO_INCREMENT for table `listingfiles`
---
-ALTER TABLE `listingfiles`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=122;
---
--- AUTO_INCREMENT for table `region`
---
-ALTER TABLE `region`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `rel_father`
---
-ALTER TABLE `rel_father`
-MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `rel_mother`
---
-ALTER TABLE `rel_mother`
-MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `testimonials`
---
-ALTER TABLE `testimonials`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `usergroups`
---
-ALTER TABLE `usergroups`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=62;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
@@ -766,22 +663,22 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- Constraints for table `family`
 --
 ALTER TABLE `family`
-ADD CONSTRAINT `gotraFamilyId` FOREIGN KEY (`gotraId`) REFERENCES `gotra` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `regionFamilyId` FOREIGN KEY (`regionId`) REFERENCES `region` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `gotraFamilyId` FOREIGN KEY (`gotraId`) REFERENCES `gotra` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `regionFamilyId` FOREIGN KEY (`regionId`) REFERENCES `region` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `rel_father`
 --
 ALTER TABLE `rel_father`
-ADD CONSTRAINT `rel_father_fatherId` FOREIGN KEY (`fatherId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `rel_father_memberId` FOREIGN KEY (`memberId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `rel_father_fatherId` FOREIGN KEY (`fatherId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rel_father_memberId` FOREIGN KEY (`memberId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `rel_mother`
 --
 ALTER TABLE `rel_mother`
-ADD CONSTRAINT `rel_mother_memberId` FOREIGN KEY (`memberId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `rel_mother_motherId` FOREIGN KEY (`motherId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `rel_mother_memberId` FOREIGN KEY (`memberId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rel_mother_motherId` FOREIGN KEY (`motherId`) REFERENCES `family` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

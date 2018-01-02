@@ -1,48 +1,54 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>
-			<?php
-				if($action==0)
-				{
-					if (!empty($query)) {
-						$pageRow = $groups->getByURLName($query);
-						if ($pageRow) {
-							$pageName = $pageRow['name'];
-							$pageNameEn = $pageRow['nameen'];		
-						}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/fav.png">
+    <!-- Author Meta -->
+    <meta name="author" content="CodePixar">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>
+		<?php
+			if($action==0)
+			{
+				if (!empty($query)) {
+					$pageRow = $groups->getByURLName($query);
+					if ($pageRow) {
+						$pageName = $pageRow['name'];
+						$pageNameEn = $pageRow['nameen'];		
 					}
 				}
-			?>
-			<?php if($lan=='en'){
-                echo 'Department of Environment - ';
-                if($pageNameEn!=""){ echo $pageNameEn;}else if(isset($_GET['action'])){ echo $_GET['action'];}else{ echo "Home";}
-            }
-            else{
-                echo 'वातावरण विभाग - ';
-            	if($pageName!=""){ echo $pageName;}else if(isset($_GET['action'])){ echo $_GET['action'];}else{ echo "गृहपृष्ठ";}
-        	}?>
-		</title>
-		<?php include('baselocation.php'); ?>
-		<!-- Meta -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <link rel="shortcut icon" href="">  
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css">   
-        <!-- Global CSS -->
-        <link rel="stylesheet" href="styles/bootstrap.min.css">   
-        <!-- Plugins CSS -->    
-        <link rel="stylesheet" href="styles/font-awesome.css">
-        <link rel="stylesheet" href="styles/flexslider.css">
-        <link rel="stylesheet" href="styles/prettyPhoto.css"> 
-        <!-- Theme CSS -->  
-        <link id="theme-style" rel="stylesheet" href="styles/styles.css">
-        <script id="twitter-wjs" src="scripts/widgets.js"></script>
-        <script id="facebook-jssdk" src="scripts/sdk.js"></script>
-        <script type="text/javascript" src="scripts/jquery-1.11.2.min.js"></script>
-        <script type="text/javascript" charset="utf-8" async="" src="scripts/timeline.619317855a58aa2366562a395f9e40ef.js"></script>
-        <script type="text/javascript" src="js/custom.js"></script>
-	</head>
+			}
+		?>
+		<?php if($lan=='en'){
+            echo 'Chapagain Family Samaj - ';
+            if($pageNameEn!=""){ echo $pageNameEn;}else if(isset($_GET['action'])){ echo $_GET['action'];}else{ echo "Home";}
+        }
+        else{
+            echo 'Chapagain Family Samaj - ';
+        	if($pageName!=""){ echo $pageName;}else if(isset($_GET['action'])){ echo $_GET['action'];}else{ echo "गृहपृष्ठ";}
+    	}?>
+	</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,500,600" rel="stylesheet">
+    <!--
+    CSS
+    ============================================= -->
+    <link rel="stylesheet" href="css/linearicons.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
 	<body class="home-page">
     	<div class="wrapper">
     		<?php require 'template/header_include.php'; ?>

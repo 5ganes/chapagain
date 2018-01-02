@@ -32,14 +32,17 @@
 		<div class="main-wrapper-first">
 			<div class="hero-area relative">
 				<header>
-					<div class="container">
+					<div class="container containerM">
 						<div class="header-wrap">
 							<div class="header-top d-flex justify-content-between align-items-center">
 								<div class="logo">
-									<a href="index.html"><img src="img/logo.png" alt=""></a>
+									<a href="index.html">Chapagain Family Samaj</a>
 								</div>
 								<div class="main-menubar d-flex align-items-center">
 									<nav class="hide">
+										<a href="index.html">Home</a>
+										<a href="generic.html">Generic</a>
+										<a href="elements.html">Elements</a>
 										<a href="index.html">Home</a>
 										<a href="generic.html">Generic</a>
 										<a href="elements.html">Elements</a>
@@ -50,15 +53,11 @@
 						</div>
 					</div>
 				</header>
-				<div class="banner-area">
+				<div class="banner-area slider">
 					<div class="container">
 						<div class="row height align-items-center">
-							<div class="col-lg-7">
-								<div class="banner-content">
-									<h1 class="text-white text-uppercase mb-10">Don’t look anywhere, <br> This is the best place on web</h1>
-									<p class="text-white mb-30">Living in today’s metropolitan world of cellular phones, mobile computers and other high-tech gadgets is not just hectic but very</p>
-									<a href="#" class="primary-btn d-inline-flex align-items-center"><span class="mr-10">Get Started</span><span class="lnr lnr-arrow-right"></span></a>
-								</div>
+							<div class="col-lg-12">
+								<?php require 'slider/slider.php';?>
 							</div>
 						</div>
 					</div>

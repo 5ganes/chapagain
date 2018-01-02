@@ -3,6 +3,7 @@ class Family{
 	function saveOrUpdate($id, $name, $fatherId, $motherId, $birthDate, $email, $phone, $maritalStatus, $gotraId, 
 		$regionId, $gender, $publish, $weight){
 		global $conn;
+		// echo $id; die();
 		
 		$id = cleanQuery($id);
 		$name = cleanQuery($name);
@@ -24,8 +25,8 @@ class Family{
 					$sql = "UPDATE family
 						SET
 							name = '$name',
-							fatherId = '$fatherId',
-							motherId = '$motherId',
+							-- fatherId = '$fatherId',
+							-- motherId = '$motherId',
 							birthDate='$birthDate',
 							email = '$email',
 							phone = '$phone',
@@ -42,8 +43,8 @@ class Family{
 					$sql = "INSERT INTO family 
 						SET
 							name = '$name',
-							fatherId = '$fatherId',
-							motherId = '$motherId',
+							-- fatherId = '$fatherId',
+							-- motherId = '$motherId',
 							birthDate='$birthDate',
 							email = '$email',
 							phone = '$phone',
@@ -55,11 +56,51 @@ class Family{
 							weight = '$weight',
 							onDate = NOW()";
 		}
-		
 		$conn->exec($sql);
-		if($id > 0)
-			return $conn -> affRows();
-		return $conn->insertId();
+		if($id > 0){
+			// $insertId = $conn -> affRows();
+			$insertId = $id;
+		}
+		else{
+			$insertId = $conn->insertId();
+		}
+		$this->saveParents($insertId, $fatherId, $motherId);
+		return $insertId;
+	}
+
+	function saveParents($memberId, $fatherId, $motherId){
+		global $conn;
+		// echo $memberId.', '.$fatherId.', '.$motherId; die();
+		$sql = "SElECT * FROM rel_mother WHERE memberId = '$memberId'";
+		$member = $conn->exec($sql);
+		if($conn->numRows($member) > 0){
+			$sqlf = "UPDATE rel_father
+						SET
+							fatherId = '$fatherId'
+						WHERE
+							memberId = '$memberId'
+					";
+			$sqlm = "UPDATE rel_mother
+						SET
+							motherId = '$motherId'
+						WHERE
+							memberId = '$memberId'
+					";
+		}
+		else{
+			$sqlf = "INSERT INTO rel_father 
+						SET
+							memberId = '$memberId',
+							fatherId = '$fatherId'
+					";
+			$sqlm = "INSERT INTO rel_mother 
+						SET
+							memberId = '$memberId',
+							motherId = '$motherId'
+					";
+		}
+		$conn->exec($sqlf);
+		$conn->exec($sqlm);
 	}
 
 	function saveImage($id)
@@ -118,6 +159,24 @@ class Family{
 		return $result;
 	}
 
+	function getAllMales(){
+		global $conn;
+		
+		$sql = "SElECT * FROM family where gender = 'Male' AND maritalStatus = 'Married' ORDER BY weight ASC";
+		$result = $conn->exec($sql);
+		
+		return $result;
+	}
+
+	function getAllFemales(){
+		global $conn;
+		
+		$sql = "SElECT * FROM family where gender = 'Female' AND maritalStatus = 'Married' ORDER BY weight ASC";
+		$result = $conn->exec($sql);
+		
+		return $result;
+	}
+
 	function getById($id){
 		// echo $id; die();
 		global $conn;
@@ -129,6 +188,28 @@ class Family{
 		$row = $conn -> fetchArray($result);
 		// print_r($row); die();
 		return $row;
+	}
+
+	function getMemberCountByGotra($gotraId){
+		// echo $id; die();
+		global $conn;
+		
+		$id = cleanQuery($id);
+		
+		$sql = "SElECT * FROM family WHERE gotraId = '$gotraId'";
+		$result = $conn->exec($sql);
+		return $conn->numRows($result);
+	}
+
+	function getMemberCountByRegion($regionId){
+		// echo $id; die();
+		global $conn;
+		
+		$id = cleanQuery($id);
+		
+		$sql = "SElECT * FROM family WHERE regionId = '$regionId'";
+		$result = $conn->exec($sql);
+		return $conn->numRows($result);
 	}
 	
 	function getTitle($id){

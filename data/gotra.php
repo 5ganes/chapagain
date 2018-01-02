@@ -22,11 +22,20 @@ class Gotra{
 	function delete($id)
 	{  
 		global $conn;
+		global $family;
 		
 		$id = cleanQuery($id);
-	
-		$sql = "DELETE FROM gotra WHERE id = '$id'";
-		$conn->exec($sql);
+		
+		//get members if exist
+		if($family->getMemberCountByGotra($id) > 0){
+			$msg = 'Gotra can not be deleted because there are members under it.';
+		}
+		else{
+			$sql = "DELETE FROM gotra WHERE id = '$id'";
+			$conn->exec($sql);
+			$msg = 'Gotra deleted successfully';
+		}
+		return $msg;
 	}
 	
 	function getAll(){
