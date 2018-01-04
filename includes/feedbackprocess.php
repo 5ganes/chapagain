@@ -21,7 +21,7 @@ if(isset($_POST['btnFeedback']))
 			$headers .= "X-Priority: 1\r\n";
 			//sendEmail("kh6ganesh@yahoo.com", "Inquiry", $msg, $name);
 			
-			$arrTo = array("info@doenv.gov.np");
+			$arrTo = array("kh6ganesh@gmail.com");
 			$subject = "Inquiry Details :";
 			
 			mail($arrTo[0], $subject, $msg, $headers);

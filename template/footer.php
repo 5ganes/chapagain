@@ -1,31 +1,78 @@
-		<?php require 'template/footer_include.php'; ?>
-	<!-- Javascript -->
-    <script type="text/javascript" src="scripts/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="scripts/bootstrap.min.js"></script> 
-    <script type="text/javascript" src="scripts/bootstrap-hover-dropdown.min.js"></script> 
-    <script type="text/javascript" src="scripts/back-to-top.js"></script>
-    <!-- <script type="text/javascript" src="scripts/jquery.placeholder.js"></script> -->
-    <!-- <script type="text/javascript" src="scripts/jquery.prettyPhoto.js"></script> -->
-    <script type="text/javascript" src="scripts/jquery.flexslider-min.js"></script>
-    <!-- <script type="text/javascript" src="scripts/jflickrfeed.min.js"></script>  -->
-    
-	<script type="text/javascript" src="scripts/main.js"></script>            
+    </div>
+    <?php require 'footer_include.php';?>
+    <footer>
+      <!-- <img src="images/img1.png" class="footerimage">  -->
+      <hr style="width:300px;border-top:3px solid #000;">
+      <p> 
+          <?php $contact = $groups->getByURLName('contact-us'); echo $contact['shortcontents'];?>
+      </p>
+      <hr style="width:300px;border-top:3px solid #000;"> <br>
+      <button class="button2"> CONTACT US NOW</button>
+      <div class="socialmedia">
+        <ul style="list-style: none;padding: 0;">
+          <li><a href="https://facebook.com/Krishighar"><i class="fa fa-facebook"></i></a></li>
+          <li><a href=""><i class="fa fa-twitter"></i></a></li>
+          <li><a href=""><i class="fa fa-instagram"></i></a></li>
+          <li><a href=""><i class="fa fa-google"></i></a></li>
+          <li><a href=""><i class="fa fa-snapchat"></i></a></li>
+        </ul>
+      </div>
+      <p style="color:#fff;font-weight: normal; font-family:sans-serif; font-size: 13px;">
+          Copyright @ Chapagain Samaj <?php echo date('Y');?>. All rights reserved.
+      </p>
+      <p style="color:#fff;font-weight: normal; font-family:sans-serif; font-size: 13px;">
+          Powered By : <a href="http://krishighar.com">Team Krishighar</a>
+      </p>
+    </footer>
 
- </body>
-<div style="display: none;">
-<a href="http://www.o3interactive.net/">porno gif</a>
-<a href="http://amcik.amressimleri.xyz/">porno resimleri</a>
-<a href="http://www.amressimleri.xyz/seks-resimleri.html">Seks Resimleri</a>-
-<a href="http://www.amressimleri.xyz/am-resimleri.html">Am Resimleri</a>-
-<a href="http://www.amressimleri.xyz/meme-resimleri.html">Meme Resimleri</a>-
-<a href="http://www.amressimleri.xyz/turbanli-resimleri.html">Turbanli Resimleri</a>
-<a href="http://www.amressimleri.xyz/adult-resimleri.html">Adult Resimleri</a>-
-<a href="http://www.grossbrusteporno.com/">pornofilme</a>-
-<a href="http://virus.temizleme.org/">cep telefonu virus temizleme</a>-
-<a href="http://virus.temizleme.org/telefonda-virus-oldugu-nasil-anlasilir/">telefonda virus oldugu nasil anlasilir</a>-
-<a href="http://virus.temizleme.org/cep-telefonuna-virus-nasil-bulasir/">telefona virus nasil bulasir</a>-
-<a href="http://virus.temizleme.org/cep-telefonuma-bulasan-virusleri-nasil-temizlerim/">telefonuma bulasan virusleri nasil temizlerim</a>-
-<a href="http://virus.temizleme.org/telefon-virus-temizleme-programi/">telefon virus temizleme programi</a>-
-<a href="http://virus.temizleme.org/telefonu-fabrika-ayarlarina-dondurme/">telefonu fabrika ayarlarina dondurme</a>-
-</div>
- </html>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script>
+
+
+    var sliderOne = {
+      loop:true,
+       animateOut: 'flipOutX',
+        animateIn: 'fadeInLeftBig',
+        items:1,
+        margin:30,
+        stagePadding:30,
+        smartSpeed:450,
+        autoplay: true,
+        autoplayTimeout: 4000,
+    };
+
+    var sliderAuto = {
+      items:3,
+        loop:true,
+        margin:10,
+        nav:false,
+        dots:false,
+        mouseDrag:true,
+        touchDrag:true,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        center: true,
+        navText: [
+          'Previous', 'Next'
+        ],
+        responsive:{
+            0:{
+                items:4
+            },
+            600:{
+                items:4
+            },
+            1000:{
+                items:4
+            }
+        }
+    };
+
+
+    $('#slider-main').owlCarousel(sliderOne);
+    $('#slider-2').owlCarousel(sliderAuto);
+    </script>
+</body>
+</html>

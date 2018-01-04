@@ -28,29 +28,19 @@ define("LISTING_LIMIT", 15); // IMAGE AND VIDEO GALLERY LIMIT FOR CLIENT
 define("SLIDER", 723);
 define("WELCOME", 176);	
 define("CONTACT", 'contact-us');
-
-define("INFO_OFFICER", 362);
 define("LINKS", 363);
-define("NEWS", 321);
-define("INFO_OFFICER", 274);
-define("PHOTO_GALLERY", 625);
 define("PUBLICATION", 338);
 define("YOUTUBE", 373);
 define("VIDEO_GALLERY", 386);
-
-define('MSG_FROM_DG', 274);
+define('MSG_FROM_CHIEF', 274);
 define('MSG_FROM_SPOKEPERSON', 552);
-
-define('NEWS_AND_EVENTS', 574);
-define('NOTICE', 'notice');
-define('PRESS_RELEASE', 561);
-define('BULLETIN', 580);
-define('HOT_NEWS', 581);
+define('NEWS_AND_NOTICE', 839);
 define('SINGLE_VIDEO', 582);
-define('AUDIO', 585);
-define('VIDEO', 601);
 define('ABOUT', 338);
-define('MSG_FROM_DDG', 827);
+define('IMPORTANT_LINKS', 847);
+define('TEAM_MEMBERS', 854);
+define('PHOTO_GALLERY', 863);
+define('FAMILY_REPORT', 'family_report');
 
 ///////////////GENERAL CLIENT SIDE CONSTANTS///////////////////
 
@@ -58,7 +48,7 @@ define('MSG_FROM_DDG', 827);
 
 
 ////////////////LINKS AND PAGE TYPES////////////////////////
-$groupTypesArray = array("Header", "Navigation", "Important_Links", "Our_Documents", "Other");
+$groupTypesArray = array("Header", "Other");
 
 $linkTypesArray = array("Normal Group", "Link", "File", "Contents Page", "Gallery", "List", "Video Gallery");
 
