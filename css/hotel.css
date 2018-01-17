@@ -251,10 +251,10 @@ height: 50px
 	text-align: justify; color: #000; font-family: sans-serif;font-size: 15px;margin-top: 25px; line-height: 27px;
 }
 .seemore{background: #de8d5b;
-    padding: 0.5% 2%;
+    padding: 8px 15px 5px 22px;
     border-radius: 10px;
     text-decoration: none;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: bold;
     float: right; box-shadow: 5px 6px 16px red;
 }

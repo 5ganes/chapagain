@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <p class="navbar-brand"><a href="<?php echo SITE_URL; ?>">Chapagain Family Samaj</a></p>
+      <p class="navbar-brand"><a href="<?php echo SITE_URL; ?>">चापागाईं परिवार समाज</a></p>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -38,7 +38,7 @@
                   <img src="<?php echo CMS_GROUPS_DIR.$chief['image'];?>">
                   <?php echo $chief['shortcontents'];?>
                 </p>
-                <a class="seemore" href="<?php echo $chief['urlname'] ?>">See More...</a>
+                <a class="seemore" href="<?php echo $chief['urlname'] ?>">थप हेर्नुहोस...</a>
               </div>
             </div>
     </div>

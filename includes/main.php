@@ -6,7 +6,7 @@
                     <?php $welcome = $groups->getById(WELCOME); $welcome = $conn->fetchArray($welcome);?>
                     <h2 class="features"><?php echo $welcome['name'];?></h2>
                     <p><?php echo $welcome['shortcontents'];?></p>
-                    <a class="seemore" href="<?php echo $welcome['urlname'];?>">See More...</a> 
+                    <a class="seemore" href="<?php echo $welcome['urlname'];?>">थप हेर्नुहोस...</a> 
                 </div>
             </div>
           </div>
@@ -28,7 +28,7 @@
                     }
                     ?>
                 </ul>
-                <a class="seemore" href="<?php echo $newsTitle['urlname'] ?>">See More...</a>
+                <a class="seemore" href="<?php echo $newsTitle['urlname'] ?>">थप हेर्नुहोस...</a>
               <h3> 
               </div>
               <div class="col-sm-4">
@@ -42,7 +42,7 @@
                     }
                     ?>
                 </ul>
-                <a class="seemore" href="<?php echo $linkTitle['urlname'] ?>">See More...</a>
+                <a class="seemore" href="<?php echo $linkTitle['urlname'] ?>">थप हेर्नुहोस...</a>
               </div>
               <div class="col-sm-4 contact">
                 <?php $contact = $groups->getByURLName('contact-us');?>
@@ -71,7 +71,7 @@
             </div>
         </div>
     <?php }?>
-    <a class="seemore" href="<?php echo $team['urlname'];?>">See More...</a>
+    <a class="seemore" href="<?php echo $team['urlname'];?>">थप हेर्नुहोस...</a>
 </div>
 <!-- <div class="row">
     <div class="col-sm-3">
