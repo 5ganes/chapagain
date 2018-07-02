@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2018 at 08:15 PM
+-- Generation Time: Jul 02, 2018 at 07:43 AM
 -- Server version: 5.6.21
 -- PHP Version: 5.6.3
 
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `pageKeyword` text CHARACTER SET latin1 NOT NULL,
   `activity` varchar(100) CHARACTER SET latin1 NOT NULL,
   `publish` varchar(3) CHARACTER SET latin1 NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=872 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=875 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `groups`
@@ -239,7 +239,7 @@ INSERT INTO `groups` (`id`, `name`, `nameen`, `urlname`, `type`, `parentId`, `sh
 (861, 'Seventh Member', 'Seventh Member', 'seventh-member', 'Other', 854, 'Name: Firstname Surname<br />\r\n<br />\r\nPosition: Test Position<br />\r\n<br />\r\nAddress: Kalimati<br />\r\n<br />\r\nEmail: testemail@gmail.com<br />\r\n<br />\r\nPhone: 8977897878', 'Name: Firstname Surname<br />\r\n<br />\r\nPosition: Test Position<br />\r\n<br />\r\nAddress: Kalimati<br />\r\n<br />\r\nEmail: testemail@gmail.com<br />\r\n<br />\r\nPhone: 8977897878', 'Name: Firstname Surname<br />\r\n<br />\r\nPosition: Test Position<br />\r\n<br />\r\nAddress: Kalimati<br />\r\n<br />\r\nEmail: testemail@gmail.com<br />\r\n<br />\r\nPhone: 8977897878', 'Name: Firstname Surname<br />\r\n<br />\r\nPosition: Test Position<br />\r\n<br />\r\nAddress: Kalimati<br />\r\n<br />\r\nEmail: testemail@gmail.com<br />\r\n<br />\r\nPhone: 8977897878', 'Contents Page', 70, 'no', '2018-01-04', 'user.png', 'normal', 'No', '', '', '', '', '', ''),
 (862, 'Eighth Member', 'Eighth Member', 'eighth-member', 'Other', 854, 'Name: Firstname Surname<br />\r\n<br />\r\nPosition: Test Position<br />\r\n<br />\r\nAddress: Kalimati<br />\r\n<br />\r\nEmail: testemail@gmail.com<br />\r\n<br />\r\nPhone: 8977897878', 'Name: Firstname Surname<br />\r\n<br />\r\nPosition: Test Position<br />\r\n<br />\r\nAddress: Kalimati<br />\r\n<br />\r\nEmail: testemail@gmail.com<br />\r\n<br />\r\nPhone: 8977897878', 'Name: Firstname Surname<br />\r\n<br />\r\nPosition: Test Position<br />\r\n<br />\r\nAddress: Kalimati<br />\r\n<br />\r\nEmail: testemail@gmail.com<br />\r\n<br />\r\nPhone: 8977897878', 'Name: Firstname Surname<br />\r\n<br />\r\nPosition: Test Position<br />\r\n<br />\r\nAddress: Kalimati<br />\r\n<br />\r\nEmail: testemail@gmail.com<br />\r\n<br />\r\nPhone: 8977897878', 'Contents Page', 80, 'no', '2018-01-04', 'user.png', 'normal', 'No', '', '', '', '', '', ''),
 (863, 'Photo Gallery', 'Photo Gallery', 'photo-gallery', 'Other', 0, '', '', '', '', 'Gallery', 190, 'no', '2018-01-04', '', 'normal', 'No', '', '', '', '', '', ''),
-(864, '', '', '864', '', 863, 'First photo', '', '', '', 'GallerySub', 50, 'no', '2018-01-04', '864.jpg', '', '', '', '', '', '', '', ''),
+(872, '', '', '872', '', 863, '', '', '', '', 'GallerySub', 50, 'no', '2018-03-20', '872.jpg', '', '', '', '', '', '', '', ''),
 (865, '', '', '865', '', 863, 'Second photo', '', '', '', 'GallerySub', 50, 'no', '2018-01-04', '865.jpg', '', '', '', '', '', '', '', ''),
 (866, '', '', '866', '', 863, 'third photo', '', '', '', 'GallerySub', 50, 'no', '2018-01-04', '866.jpg', '', '', '', '', '', '', '', ''),
 (867, '', '', '867', '', 863, 'fourth photo', '', '', '', 'GallerySub', 50, 'no', '2018-01-04', '867.jpg', '', '', '', '', '', '', '', ''),
@@ -255,7 +255,7 @@ INSERT INTO `groups` (`id`, `name`, `nameen`, `urlname`, `type`, `parentId`, `sh
 (869, 'Our Vision', 'Our Vision', 'our-vision', 'Header', 338, '', '', '', '', 'Contents Page', 20, 'no', '2018-01-04', '', 'normal', 'No', '', '', '', '', '', ''),
 (870, 'Our Aims', 'Our Aims', 'our-aims', 'Header', 338, '', '', '', '', 'Contents Page', 30, 'no', '2018-01-04', '', 'normal', 'No', '', '', '', '', '', ''),
 (373, '&#2349;&#2367;&#2337;&#2367;&#2351;&#2379;', 'Official-Video', 'youtube', 'Other', 0, '', '', 'https://www.youtube.com/embed/sw0jlvkH9KA', '', 'Link', 140, 'no', '2016-06-15', '', 'normal', 'No', '', '', '', '', '', ''),
-(274, 'Message From Chief', 'Message From Chief', 'message-from-chief', 'Other', 0, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,', '<p style="text-align:justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,</p>\r\n', '<p style="text-align:justify">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,</p>\r\n', 'Contents Page', 30, 'no', '2014-04-22', 'user.png', 'normal', 'No', '', '', '', '', '', ''),
+(274, 'Message From Chief', 'Message From Chief', 'message-from-chief', 'Other', 0, 'hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;', 'hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;', '<p style="text-align:justify">hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;</p>\r\n', '<p style="text-align:justify">hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;hello world&nbsp;</p>\r\n', 'Contents Page', 30, 'no', '2014-04-22', 'user.png', 'normal', 'No', '', '', '', '', '', ''),
 (723, 'Slider', 'Slider', 'slider', 'Other', 0, '', '', '', '', 'Gallery', 170, 'no', '2017-04-03', '', 'normal', 'No', '', '', '', '', '', ''),
 (847, 'Important Links', 'Important Links', 'important-links', 'Header', 0, 'Hello', '', 'hello', 'hello', 'Normal Group', 40, 'no', '2018-01-04', '', 'normal', 'No', '', '', '', '', '', ''),
 (848, 'ICT in Agriculture Nepal', 'ICT in Agriculture Nepal', 'ict-in-agriculture-nepal', 'Header', 847, '', '', 'http://krishighar.com', '', 'Link', 10, 'no', '2018-01-04', '', 'normal', 'No', '', '', '', '', '', ''),
@@ -276,7 +276,9 @@ INSERT INTO `groups` (`id`, `name`, `nameen`, `urlname`, `type`, `parentId`, `sh
 (853, 'Test Link 5', 'Test Link 5', 'test-link-5', 'Header', 847, '', '', 'http://krishighar.com', '', 'Link', 60, 'no', '2018-01-04', '', 'normal', 'No', '', '', '', '', '', ''),
 (836, '', '', '836', '', 723, '', '', '', '', 'GallerySub', 50, 'no', '2018-01-04', '836.jpg', '', '', '', '', '', '', '', ''),
 (837, '', '', '837', '', 723, '', '', '', '', 'GallerySub', 50, 'no', '2018-01-04', '837.jpg', '', '', '', '', '', '', '', ''),
-(838, '', '', '838', '', 723, '', '', '', '', 'GallerySub', 50, 'no', '2018-01-04', '838.jpg', '', '', '', '', '', '', '', '');
+(838, '', '', '838', '', 723, '', '', '', '', 'GallerySub', 50, 'no', '2018-01-04', '838.jpg', '', '', '', '', '', '', '', ''),
+(873, '', '', '873', '', 863, '', '', '', '', 'GallerySub', 50, 'no', '2018-03-20', '873.png', '', '', '', '', '', '', '', ''),
+(874, 'Clairs Careers', 'Clairs Careers', 'clairs-careers', 'Header', 0, 'Claire&rsquo;s Cars currently has no job opportunities available, but keep checking as new positions become available regularly!', 'Claire&rsquo;s Cars currently has no job opportunities available, but keep checking as new positions become available regularly!', 'Claire&rsquo;s Cars currently has no job opportunities available, but keep checking as new positions become available regularly!', 'Claire&rsquo;s Cars currently has no job opportunities available, but keep checking as new positions become available regularly!', 'Contents Page', 100, 'no', '2018-03-27', '', 'normal', 'No', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -526,7 +528,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `lastLogin`, `loginTimes`, `status`, `userGroupId`) VALUES
-(1, 'admin', 'chapagain_123_#', '2018-01-03 13:55:44', 481, 'A', 1),
+(1, 'admin', 'chapagain_123_#', '2018-07-01 16:44:23', 484, 'A', 1),
 (2, 'manager', 'manager', '2017-01-12 21:32:00', 36, 'A', 2);
 
 --
@@ -633,7 +635,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=872;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=875;
 --
 -- AUTO_INCREMENT for table `listingfiles`
 --
