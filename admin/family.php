@@ -109,7 +109,7 @@
                             <td>&nbsp;</td>
                             <td class="tahomabold11"><strong> Father's Name : <span class="asterisk">*</span></strong></td>
                             <td>
-                              <select name="fatherId">
+                              <select name="fatherId" required>
                                 <option value="select">Select One</option>
                                 <?php
                                 $sql = "SELECT f2.id as fatherId FROM 

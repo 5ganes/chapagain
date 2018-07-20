@@ -10,8 +10,8 @@
 		
 		function Dbconn(){
 			$this->host = "localhost";
-			$this->uname = "student"; 		
-			$this->psw = "student";					
+			$this->uname = "root"; 		
+			$this->psw = "";					
 			$this->dbname = "chapagain";
 			
 			$this->links = mysql_connect($this->host,$this->uname,$this->psw) or die("Sorry, couldnot connect to MySQL Server");
