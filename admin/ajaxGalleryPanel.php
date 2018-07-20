@@ -34,7 +34,7 @@ if (isset($_GET['id']))
     <div align="right">
       <div style="cursor: pointer;" onclick="delete_confirmation('manage_cms.php?id=<?php echo $_GET['id']; ?>&parentId=<?php echo $_GET['parentId']; ?>&groupType=<?php echo $_GET['groupType']; ?>&imageId=<?php echo $imageRow['id']; ?>&deleteImage');">[x]&nbsp;</div>
     </div>
-    <div align="center" style="width: 100%; height: 130px;"> <img src="../data/imager.php?file=../<?php echo CMS_GROUPS_DIR . $imageRow['image']; ?>&mw=120&mh=120&fix"> </div>
+    <div align="center" style="width: 100%; height: 130px;"> <img src="../<?php echo CMS_GROUPS_DIR . $imageRow['image']; ?>" width="120" height="120"> </div>
     <div align="center">
       <input type="hidden" name="oldCaptionIds[]" value="<?php echo $imageRow['id'] ?>" />
       <input type="text" name="oldCaptions[]" value="<?php echo $imageRow['shortcontents'] ?>" class="text" style="width:155px;" />
