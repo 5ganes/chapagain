@@ -2,9 +2,9 @@ AddType text/x-component .htc
 
 RewriteEngine On
 # localhost
- RewriteBase /chapagain/
+# RewriteBase /chapagain/
 # live
-# RewriteBase /
+RewriteBase /
 
 #for english
 RewriteRule ^en/home index.php?lan=en [L]
@@ -25,7 +25,9 @@ RewriteRule ^en/([-A-Za-z0-9]+)$ index.php?lan=en&query=$1 [L]
 RewriteRule ^en$ index.php?lan=en [L]
 
 
+RewriteRule ^family-report/([0-9]+) index.php?action=family_report&parentDBId=$1 [L]
 RewriteRule ^family-report index.php?action=family_report [L]
+
 #RewriteRule ^userlogin index.php?action=userlogin [L]
 
 RewriteRule photo-gallery index.php?action=photo_gallery [L]

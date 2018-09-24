@@ -12,7 +12,8 @@
       
   $weight = $family -> getLastWeight();
   if($_GET['type'] == "edit"){
-    $result = $family->getById($_GET['id']);  
+    $result = $family->getMemberById($_GET['id']);
+    // print_r($result); die();  
     extract($result);
   }
   if($_POST['type'] == "Save"){
@@ -65,6 +66,47 @@
 
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
+<style type="text/css">
+  #myInput, #myInputMother {
+    border-box: box-sizing;
+    padding: 7px;
+    width: 237px;
+  }
+
+  #myInput:focus, #myInputMother:focus {outline: 3px solid #ddd;}
+
+  .dropdown, .dropdown-mother {
+      position: relative;
+      display: inline-block;
+  }
+
+  .dropdown-content, .dropdown-content-mother {
+      display: none;
+      position: absolute;
+      background-color: #f6f6f6;
+      min-width: 250px;
+      overflow: auto;
+      border: 1px solid #ddd;
+      z-index: 1;
+  }
+
+  .dropdown-content a, .dropdown-content-mother a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block; cursor: pointer;
+  }
+
+  .dropdown a:hover, .dropdown-mother a:hover {background-color: #ddd;}
+
+  .show {display: block;}
+  .nonparents{
+    font-weight: bold; font-size: 12px;
+  }
+
+</style>
+
+
 </head>
 <body>
   <table width="<?php echo ADMIN_PAGE_WIDTH; ?>" border="0" align="center" cellpadding="0"
@@ -109,7 +151,16 @@
                             <td>&nbsp;</td>
                             <td class="tahomabold11"><strong> Father's Name : <span class="asterisk">*</span></strong></td>
                             <td>
-                              <select name="fatherId" required>
+
+                              <div class="dropdown">
+                                <input type="text" placeholder="Type Name or ID" id="myInput" onkeyup="filterFunction(this.value)" value="<?php if(isset($_GET['id'])){ if(isset($fatherId)) echo $fatherName . ' ( '. $fatherId .' )'; else echo '-'; }?>" required>
+                                <span class="nonparents"> [ Type dash(-) for Wife ] </span>
+                                <input type="hidden" name="fatherId" value="<?php echo $fatherId;?>" id="fatherId">
+                                <div id="myDropdown" class="dropdown-content">
+                                </div>
+                              </div>
+
+                              <!-- <select name="fatherId" required>
                                 <option value="select">Select One</option>
                                 <?php
                                 $sql = "SELECT f2.id as fatherId FROM 
@@ -124,7 +175,7 @@
                                   <option value="<?=$record['id'];?>" <?php if($oldFather['fatherId']==$record['id']) echo 'selected'?>><?=$record['name']?></option>
                                 <?php }
                                 ?>
-                              </select>
+                              </select> -->
                             </td>
                           </tr>
                           <tr><td></td></tr>
@@ -133,7 +184,16 @@
                             <td>&nbsp;</td>
                             <td class="tahomabold11"><strong> Mother's Name : <span class="asterisk">*</span></strong></td>
                             <td>
-                              <select name="motherId">
+
+                              <div class="dropdown-mother">
+                                <input type="text" placeholder="Type Name or ID" id="myInputMother" onkeyup="filterFunctionMother(this.value)" value ="<?php if(isset($_GET['id'])){ if(isset($motherId)) echo $motherName . ' ( '. $motherId .' )'; else echo '-'; }?>" required>
+                                <span class="nonparents"> [ Type dash(-) for Wife ] </span>
+                                <input type="hidden" name="motherId" value="<?php echo $motherId;?>" id="motherId">
+                                <div id="myDropdownMother" class="dropdown-content-mother">
+                                </div>
+                              </div>
+
+                              <!-- <select name="motherId">
                                 <option value="select">Select One</option>
                                 <?php
                                 $sql = "SELECT f2.id as motherId FROM 
@@ -148,7 +208,7 @@
                                   <option value="<?=$record['id'];?>" <?php if($oldMother['motherId']==$record['id']) echo 'selected'?>><?=$record['name']?></option>
                                 <?php }
                                 ?>
-                              </select>
+                              </select> -->
                             </td>
                           </tr>
                           <tr><td></td></tr> 
@@ -322,10 +382,34 @@
                 
                   $counter = 0;
                   $pagename = "family.php?";
-                  $limit = 3;
+                  $limit = 100;
                   $sql = "SELECT 
-                        family.id as id, family.name as name, email, gender, family.publish as publish, family.weight as weight FROM family";
-                  $sql=$sql." ORDER BY weight ASC";
+                            f1.id as id, 
+                            f1.name as name, 
+                            f1.birthDate as birthDate, 
+                            f1.email as email, 
+                            f1.phone as phone, 
+                            f1.maritalStatus as maritalStatus, 
+                            f1.gotraId as gotraId, 
+                            f1.regionId as regionId, 
+                            f1.gender as gender, 
+                            f1.image as image, 
+                            f1.publish as publish, 
+                            f1.onDate as onDate, 
+                            f1.weight as weight,  
+                            f2.name as fatherName, 
+                            f3.name as motherName 
+                          FROM 
+                            family as f1 
+                          LEFT JOIN 
+                            rel_father as rf on f1.id = rf.memberId
+                          LEFT JOIN 
+                            family as f2 on rf.fatherId = f2.id
+                          LEFT JOIN 
+                            rel_mother as rm on f1.id = rm.memberId
+                          LEFT JOIN
+                             family as f3 on rm.motherId = f3.id";
+                  $sql=$sql." ORDER BY f1.weight ASC";
                   include("paging.php"); $sn = 1;
                   while($row = $conn -> fetchArray($result))
                   {?>
@@ -333,8 +417,12 @@
                             <td valign="top">&nbsp;</td>
                             <td valign="top"><?php echo $sn++;?></td>
                             <td valign="top"><?= $row['name'] ?></td>
-                            <td valign="top"><?= $row['name'] ?></td>
-                            <td valign="top"><?= $row['name'] ?></td>
+                            <td valign="top">
+                                <? if(isset($row['fatherName'])) echo $row['fatherName']; else echo '-'; ?>
+                            </td>
+                            <td valign="top">
+                                <? if(isset($row['motherName'])) echo $row['motherName']; else echo '-'; ?>
+                            </td>
                             <td valign="top"><?= $row['email'] ?></td>
                             <td valign="top"><?= $row['gender'] ?></td>
                             <td valign="top"><?= $row['publish'] ?></td>
@@ -361,6 +449,62 @@
       <td colspan="2"><?php include("footer.php"); ?></td>
     </tr>
   </table>
+
+  <script type="text/javascript">
+    
+    // get father js
+    function filterFunction(keyword) {
+      document.getElementsByClassName('dropdown-content')[0].style.display = 'block';
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open('POST', 'ajaxFatherSearch.php', true);
+
+      var data = new FormData();
+      data.append('keyword', keyword);
+      xmlHttp.send(data);
+
+      xmlHttp.onreadystatechange = function(){
+          if(xmlHttp.readyState == 4){
+              document.getElementById('myDropdown').innerHTML = xmlHttp.responseText;
+          }
+      } 
+    }
+
+    function selectRow(rowName, rowId, rowRegion){
+      document.getElementById('myInput').value = rowName + ' ( ' + rowId + ' )( ' + rowRegion + ' )';
+      document.getElementById('myInput').disabled = true;
+      document.getElementById('fatherId').value = rowId;
+      document.getElementsByClassName('dropdown-content')[0].style.display = 'none';
+    }
+    // get father js ends
+
+    // get mother js
+    function filterFunctionMother(keyword) {
+      document.getElementsByClassName('dropdown-content-mother')[0].style.display = 'block';
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open('POST', 'ajaxMotherSearch.php', true);
+
+      var data = new FormData();
+      data.append('keyword', keyword);
+      xmlHttp.send(data);
+
+      xmlHttp.onreadystatechange = function(){
+          if(xmlHttp.readyState == 4){
+              document.getElementById('myDropdownMother').innerHTML = xmlHttp.responseText;
+          }
+      } 
+    }
+
+    function selectRowMother(rowName, rowId, rowRegion){
+      document.getElementById('myInputMother').value = rowName + ' ( ' + rowId + ' )( ' + rowRegion + ' )';
+      document.getElementById('myInputMother').disabled = true;
+      document.getElementById('motherId').value = rowId;
+      document.getElementsByClassName('dropdown-content-mother')[0].style.display = 'none';
+    }
+    // get mother js ends
+
+  </script>
+
 </body>
 </html>
-<?php die(); ?>
+
+<?php //die(); ?>

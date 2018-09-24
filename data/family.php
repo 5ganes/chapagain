@@ -64,7 +64,8 @@ class Family{
 		else{
 			$insertId = $conn->insertId();
 		}
-		$this->saveParents($insertId, $fatherId, $motherId);
+		if($fatherId != '' && $motherId != '')
+			$this->saveParents($insertId, $fatherId, $motherId);
 		return $insertId;
 	}
 
@@ -183,7 +184,46 @@ class Family{
 		
 		$id = cleanQuery($id);
 		
-		$sql = "SElECT * FROM family WHERE id = '$id'";
+		$sql = "SELECT * FROM family WHERE id = '$id'";
+		$result = $conn->exec($sql);
+		$row = $conn -> fetchArray($result);
+		// print_r($row); die();
+		return $row;
+	}
+
+	function getMemberById($id){
+		global $conn;
+		$id = cleanQuery($id);
+		$sql = "SELECT 
+					f1.id as id, 
+					f1.name as name, 
+					f1.birthDate as birthDate, 
+					f1.email as email, 
+					f1.phone as phone, 
+					f1.maritalStatus as maritalStatus, 
+					f1.gotraId as gotraId, 
+					f1.regionId as regionId, 
+					f1.gender as gender, 
+					f1.image as image, 
+					f1.publish as publish, 
+					f1.onDate as onDate, 
+					f1.weight as weight, 
+					f2.id as fatherId, 
+					f2.name as fatherName, 
+					f3.id as motherId, 
+					f3.name as motherName 
+				FROM 
+					family as f1 
+				LEFT JOIN 
+					rel_father as rf on f1.id = rf.memberId
+				LEFT JOIN 
+					family as f2 on rf.fatherId = f2.id
+				LEFT JOIN 
+					rel_mother as rm on f1.id = rm.memberId
+				LEFT JOIN
+					 family as f3 on rm.motherId = f3.id
+				WHERE 
+					f1.id = '$id'";
 		$result = $conn->exec($sql);
 		$row = $conn -> fetchArray($result);
 		// print_r($row); die();
@@ -234,5 +274,13 @@ class Family{
 		}
 		else
 			return 10;
+	}
+
+	function getFirstParents(){
+		global $conn;
+		$sql = "SElECT name FROM family WHERE id IN(1, 7)";
+		$result = $conn->exec($sql);
+		return $result;
+		// print_r($result); die();
 	}
 }

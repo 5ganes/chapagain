@@ -28,6 +28,9 @@ $feedbacks			    = new Feedbacks();
 // $donate                 = new Donate();
 // $enewsletters			= new Enewsletters();
 
+require_once("data/family.php");
+$family = new Family();
+
 require_once("data/constants.php");
 require_once("data/sqlinjection.php");
 require_once("data/youtubeimagegrabber.php");
@@ -75,4 +78,8 @@ function imager($source, $width, $height, $fix="")
 		$str .= '&amp;fix';		
 	return $str;
 }
+
+//global key for tree node position in family tree pre traversal
+$key = 1;
+
 ?>
