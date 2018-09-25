@@ -27,8 +27,8 @@ else if($action==0)
 			$pageDate = $pageRow['onDate'];
 			$pageImage = $pageRow['image'];
 			$pageFeatured = $pageRow['featured'];
-			$pageCode = $pageRow['code'];
-			$pagePrice = $pageRow['price'];
+			// $pageCode = $pageRow['code'];
+			// $pagePrice = $pageRow['price'];
 			$pagePageTitle = $pageRow['pageTitle'];
 			$pagePageKeyword = $pageRow['pageKeyword'];
 			$pageDisplay = $pageRow['display'];

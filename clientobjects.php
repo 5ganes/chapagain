@@ -1,6 +1,7 @@
 <?php
 session_start();
-error_reporting(E_ERROR);
+// error_reporting(E_ERROR);
+ini_set('error_reporting', E_ALL);
 ini_set("register_globals", "off");
 ini_set("upload_max_filesize", "100M");
 ini_set("post_max_size", "100M");
@@ -38,7 +39,7 @@ require_once("data/youtubeimagegrabber.php");
 
 include("includes/feedbackprocess.php");
 include("includes/testimonialprocess.php");
-include("includes/enquiry.php");
+// include("includes/enquiry.php");
 
 require_once('data/loginuserprocess.php');
 require_once('data/checkloggedin.php');

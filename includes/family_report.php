@@ -136,7 +136,8 @@
       }
       return $tree;
   }
-  $tree = ['{ key: 0, name: "Haridas", gender: "M", motherName: "", bornDate: "1936", maritalStatus: "Married" }'];
+  $tree = array();
+  $tree[] = '{ key: 0, name: "Haridas", gender: "M", motherName: "", bornDate: "1936", maritalStatus: "Married" }';
   $tree = findTree($parentDBId, $tree, 0); // findTree(parentIdDB, $treeArray, parentNodePosition);
   $treeString = implode(', ', $tree);
   // echo implode(', ', $tree); die();

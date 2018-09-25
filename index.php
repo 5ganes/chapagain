@@ -16,8 +16,9 @@
       }
     }
 
+    $lan = '';
     require_once('clientobjects.php');
-    $lan=$_GET['lan']; //echo $lan; die();
+    if(isset($_GET['lan'])) $lan=$_GET['lan']; //echo $lan; die();
     
     if(isset($_GET['action'])){
       $page=$_GET['action']; $action=1; $pageLinkType='';
