@@ -20,7 +20,7 @@ require_once("data/feedbacks.php");
 require_once("data/program.php");
 $program = new Program();
 
-// make pdo global
+// make pdo global 
 $pdo = null;
 
 $conn 					= new Dbconn();		
