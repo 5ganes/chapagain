@@ -1,7 +1,7 @@
 <?php //sdfsdf
 session_start();
-// error_reporting(E_ERROR);
-ini_set('error_reporting', E_ALL);
+error_reporting(E_ERROR);
+// ini_set('error_reporting', E_ALL);
 ini_set("register_globals", "off");
 ini_set("upload_max_filesize", "100M");
 ini_set("post_max_size", "100M");
