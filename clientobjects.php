@@ -1,4 +1,4 @@
-<?php
+<?php //sdfsdf
 session_start();
 // error_reporting(E_ERROR);
 ini_set('error_reporting', E_ALL);
