@@ -9,26 +9,19 @@
 		var $db;
 		
 		function Dbconn(){
-			global $pdo;
 			$this->host = "localhost";
-			$this->uname = "student"; 		
-			$this->psw = "student";					
-			$this->dbname = "chapagain";
-			try {
-			    // new code
-				$pdo = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->uname, $this->psw);
-			    // set the PDO error mode to exception
-			    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			    // echo "Connected successfully"; 
-			}
-			catch(PDOException $e){
-				echo "Connection failed: " . $e->getMessage();
-			}
-			// die();
-			// old code
-			// $this->links = mysql_connect($this->host,$this->uname,$this->psw) or die("Sorry, couldnot connect to MySQL Server");
-			// $this->db = mysql_select_db($this->dbname,$this->links) or die("Sorry, couldnot find database");			
-			// mysql_set_charset('utf8');
+			$this->uname = "root"; 		
+			$this->psw = "";					
+			$this->dbname = "doasoil";
+			
+			$this->links = mysql_connect($this->host,$this->uname,$this->psw) or die("Sorry, couldnot connect to MySQL Server");
+			$this->db = mysql_select_db($this->dbname,$this->links) or die("Sorry, couldnot find database");	
+			//$result = mysql_query("SET NAMES utf8");		
+			mysql_set_charset('utf8');
+			
+			//mysql_query("SET NAMES 'utf8'");
+			//mysql_query("SET CHARACTER SET utf8");
+			//mysql_query("SET COLLATION_CONNECTION = 'utf8_unicode_ci'");
 		}
 		
 		function exec($sqlMain){
