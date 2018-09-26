@@ -1256,12 +1256,14 @@ class Groups
 	{
 		global $conn;
 		
-		$sql = "SELECT COUNT(id) cnt FROM groups WHERE urlname = '$urlname' AND id <> '$id'";
-
-		$result = $conn->exec($sql);
+		$sql = "SELECT COUNT(id) cnt FROM groups WHERE urlname = :urlname AND id <> :id";
+		$criteria = [
+			'id' => $id,
+			'urlname' => $urlname
+		];
+		$stmt = $conn->exec($sql, $criteria);
 		$row = $conn -> fetchArray($result);
-		if($row['cnt'] > 0)
-		{
+		if($row > 0){
 			return false;
 		}
 		return true;

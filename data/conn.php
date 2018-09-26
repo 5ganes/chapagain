@@ -31,12 +31,11 @@
 			// mysql_set_charset('utf8');
 		}
 		
-		function exec($sqlMain){
-			//echo $sqlMain;
-			//$result = mysql_query($sqlMain,$this->links) or die("You have some problem with your data");
-			$result = mysql_query($sqlMain,$this->links) or die(mysql_error());
-			//$result = mysql_query($sqlMain,$this->links);
-			return $result;
+		function exec($sqlMain, $criteria){
+			global $pdo;
+			$stmt = $pdo->prepare($sqlMain);
+			$stmt = $pdo->execute($criteria);
+			return $stmt;
 		}
 		
 		function exec2($sqlMain){
@@ -60,9 +59,9 @@
 			return mysql_insert_id();
 		}
 		
-		function fetchArray($result)
-		{
-			return mysql_fetch_array($result);
+		function fetchArray($stmt){
+			global $pdo;
+			return $stmt->rowCount($stmt);
 		}	
 		
 		function fetchObject($result)
