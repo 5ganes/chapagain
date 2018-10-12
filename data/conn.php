@@ -13,23 +13,36 @@
 			$this->uname = "student"; 		
 			$this->psw = "student";					
 			$this->dbname = "chapagain";
-			
-			$this->links = mysql_connect($this->host,$this->uname,$this->psw) or die("Sorry, couldnot connect to MySQL Server");
-			$this->db = mysql_select_db($this->dbname,$this->links) or die("Sorry, couldnot find database");	
-			//$result = mysql_query("SET NAMES utf8");		
-			mysql_set_charset('utf8');
-			
-			//mysql_query("SET NAMES 'utf8'");
-			//mysql_query("SET CHARACTER SET utf8");
-			//mysql_query("SET COLLATION_CONNECTION = 'utf8_unicode_ci'");
+			try {
+				// die('sdf');
+			    // new code
+				$pdo = new PDO("mysql:host=$this->host;dbname=$this->dbname;charset=utf8", $this->uname, $this->psw);
+			    // set the PDO error mode to exception
+			    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			    // echo "Connected successfully"; 
+			}
+			catch(PDOException $e){
+				echo "Connection failed: " . $e->getMessage();
+			}
+			// die();
+			// old code
+			// $this->links = mysql_connect($this->host,$this->uname,$this->psw) or die("Sorry, couldnot connect to MySQL Server");
+			// $this->db = mysql_select_db($this->dbname,$this->links) or die("Sorry, couldnot find database");			
+			// mysql_set_charset('utf8');
 		}
 		
-		function exec($sqlMain){
-			//echo $sqlMain;
-			//$result = mysql_query($sqlMain,$this->links) or die("You have some problem with your data");
-			$result = mysql_query($sqlMain,$this->links) or die(mysql_error());
-			//$result = mysql_query($sqlMain,$this->links);
-			return $result;
+		function exec($sqlMain, $criteria = 0){
+			global $pdo;
+			// print_r($criteria);
+			$stmt = $pdo->prepare($sqlMain);
+			if($criteria == 0){ 
+				$stmt->execute();
+			}
+			else{
+				$stmt->execute($criteria);
+				// print_r($stmt);
+			}
+			return $stmt;
 		}
 		
 		function exec2($sqlMain){
@@ -38,24 +51,25 @@
 			return $result;
 		}
 		
-		function numRows($result)
+		function numRows($stmt)
 		{
-			return mysql_num_rows($result);			
+			return $stmt->rowCount();			
 		}
 		
-		function affRows()
+		function affRows($stmt)
 		{
-			return mysql_affected_rows();			
+			return $stmt->rowCount();			
 		}
 		
 		function insertId()
 		{
-			return mysql_insert_id();
+			global $pdo;
+			return $pdo->lastInsertId();
 		}
 		
-		function fetchArray($result)
-		{
-			return mysql_fetch_array($result);
+		function fetchArray($stmt){
+			// global $pdo;
+			return $stmt->fetch();
 		}	
 		
 		function fetchObject($result)

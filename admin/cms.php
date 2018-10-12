@@ -58,25 +58,25 @@ if (isset($_GET['groupType']))
                             <td class="heading2">
                               <div style="float: right;">
                                 <?php
-																$addLink = "cms.php";
-																$formLink = "manage_cms.php";
-																
-																if (isset($_GET['groupType']))
-																{
-																 $addLink .= "?groupType=" . $_GET['groupType'];
-																 $formLink .= "?groupType=" . $_GET['groupType'];
-																}
-																if (isset($_GET['parentId']))
-																{
-																 $addLink .= "&parentId=" . $_GET['parentId'];
-																 $formLink .= "&parentId=" . $_GET['parentId'];
-																}
-																if(isset($_GET['page']))
-																{
-																	$addLink .= "&page=" . $_GET['page'];
-																 	$formLink .= "&page=" . $_GET['page'];
-																} 
-																?>
+									$addLink = "cms.php";
+									$formLink = "manage_cms.php";
+									
+									if (isset($_GET['groupType']))
+									{
+									 $addLink .= "?groupType=" . $_GET['groupType'];
+									 $formLink .= "?groupType=" . $_GET['groupType'];
+									}
+									if (isset($_GET['parentId']))
+									{
+									 $addLink .= "&parentId=" . $_GET['parentId'];
+									 $formLink .= "&parentId=" . $_GET['parentId'];
+									}
+									if(isset($_GET['page']))
+									{
+										$addLink .= "&page=" . $_GET['page'];
+									 	$formLink .= "&page=" . $_GET['page'];
+									} 
+								?>
                                 <a href="<?php echo $addLink ?>" class="headLink"> Add New </a> </div>
 																&nbsp;Manage Contents</td>
                           </tr>
@@ -309,7 +309,7 @@ if (isset($_GET['groupType']))
 																				$makeThisSelected = $_GET['parentId'];
 																				if (isset($groupRow['parentId']))
 																				 $makeThisSelected = $groupRow['parentId'];
-																				$groups->comboRecursion($selectedGroupType, $makeThisSelected, 0);
+							$groups->comboRecursion($selectedGroupType, $makeThisSelected, 0);
 																				?>
                                       </select></td>
                                   </tr>

@@ -1,7 +1,7 @@
 <?php
-function Pagination($content, $type, $limit=10, $alias_name)
+function Pagination($content, $type, $limit=10, $alias_name, $criteria)
 {
-	global $pagename;
+	global $pagename; global $conn;
 	
 	if($type == "content")
 	{
@@ -20,11 +20,11 @@ function Pagination($content, $type, $limit=10, $alias_name)
 	{		
 		// global $limit;
 		
-		$rsord = mysql_query($content);
+		$rsord = $conn->exec($content, $criteria);
 		
 		if($rsord)
 		{
-		 $cntorder = mysql_num_rows($rsord);
+		 $cntorder = $conn->numRows($rsord);
 		}
 			
 		if (!isset($limit))

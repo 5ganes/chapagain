@@ -17,8 +17,8 @@ require_once("data/feedbacks.php");
 //require_once("data/enewsletters.php");
 
 //include for programs
-require_once("data/program.php");
-$program = new Program();
+// require_once("data/program.php");
+// $program = new Program();
 
 $conn 					= new Dbconn();		
 $users	 				= new Users();
@@ -33,7 +33,7 @@ require_once("data/family.php");
 $family = new Family();
 
 require_once("data/constants.php");
-require_once("data/sqlinjection.php");
+// require_once("data/sqlinjection.php");
 require_once("data/youtubeimagegrabber.php");
 
 

@@ -21,7 +21,15 @@
         }
         else{
             echo 'Chapagain Family Samaj - ';
-        	if($pageName!=""){ echo $pageName;}else if(isset($_GET['action'])){ echo $_GET['action'];}else{ echo "Home";}
+        	if(isset($pageName)){ 
+                echo $pageName;
+            }
+            else if(isset($_GET['action'])){
+                echo $_GET['action'];
+            }
+            else{ 
+                echo "Home";
+            }
     	}?>
 	</title>
     <?php require 'baselocation.php';?>

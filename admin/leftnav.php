@@ -18,6 +18,7 @@
             <li><a href="cms.php?id=274&parentId=0&groupType=Other">Message From Chief</a></li>
             <li><a href="cms.php?parentId=854&groupType=Other&open">Manage Samaj Team Members</a></li>
             <li><a href="cms.php?id=863&parentId=0&groupType=Other">Manage Photo Gallery</a></li>
+            <li><a href="feedbacks.php">Manage Feedbacks</a></li>
             <li><a href="cms.php?groupType=Other">Manage Other</a></li>
     	</ul>
   	</li>
