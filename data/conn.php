@@ -9,6 +9,7 @@
 		var $db;
 		
 		function Dbconn(){
+			global $pdo;
 			$this->host = "localhost";
 			$this->uname = "student"; 		
 			$this->psw = "student";					
