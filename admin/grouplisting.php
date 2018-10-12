@@ -18,7 +18,7 @@
 			}
 			else
 			{
-				echo "Sub groups of " . $groups->getNameById($parentId, "en") . " of type " . $selectedGroupType;
+				echo "Sub groups of " . $groups->getNameById($parentId) . " of type " . $selectedGroupType;
 			}
 			?>    </td>
   </tr>

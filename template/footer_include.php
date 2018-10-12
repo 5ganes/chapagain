@@ -1,4 +1,4 @@
-<?php if(isset($_GET['action']) and $_GET['action'] != FAMILY_REPORT){?>
+<?php if(!isset($_GET['action']) && empty($pageLinkType)){?>
   <div class="five" style="margin-top:50px;">
       <div class="row">
         <h2 class="features" style="text-align: center;"> <hr style="border-top:1px solid #de8d5b;"> Photo Gallery </h2> <br/><br/>

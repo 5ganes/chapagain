@@ -3,19 +3,35 @@ class Region{
 	function saveOrUpdate($id=0, $name, $publish, $weight){
 		global $conn;
 		
-		$id = cleanQuery($id);
-		$name = cleanQuery($name);
-		$publish = cleanQuery($publish);
-		$weight = cleanQuery($weight);
-		if($id > 0)
-			$sql = "UPDATE region SET name = '$name', onDate = NOW(), publish = '$publish', weight = '$weight' WHERE id = '$id'";
-		else
-			$sql = "INSERT INTO region SET name = '$name', onDate = NOW(), publish = '$publish', weight = '$weight'";
+		$criteria = array();
+		if($id > 0){
+			$sql = "UPDATE 
+						region 
+					SET 
+						name = :name,  
+						publish = :publish, 
+						weight = :weight 
+					WHERE 
+						id = :id";
+			$criteria['id'] = $id;
+		}
+		else{
+			$sql = "INSERT INTO 
+						region 
+					SET 
+						name = :name,  
+						publish = :publish, 
+						weight = :weight,
+						onDate = :onDate";
+			$criteria['onDate'] = date('Y-m-d');	
+		}
+		$criteria['name'] = $name;
+		$criteria['publish'] = $publish;
+		$criteria['weight'] = $weight;
 		
-		$conn->exec($sql);
-		
+		$stmt = $conn->exec($sql, $criteria);
 		if($id > 0)
-			return $conn -> affRows();
+			return $conn -> affRows($stmt);
 		return $conn->insertId();
 	}
 	
@@ -24,15 +40,16 @@ class Region{
 		global $conn;
 		global $family;
 		
-		$id = cleanQuery($id);
-		
 		//get members if exist
 		if($family->getMemberCountByRegion($id) > 0){
 			$msg = 'Region can not be deleted because there are members under it.';
 		}
 		else{
-			$sql = "DELETE FROM region WHERE id = '$id'";
-			$conn->exec($sql);
+			$sql = "DELETE FROM region WHERE id = :id";
+			$criteria = array(
+				'id' => $id
+			);
+			$stmt = $conn->exec($sql, $criteria);
 			$msg = 'Region deleted successfully';
 		}
 		return $msg;
@@ -43,17 +60,18 @@ class Region{
 		
 		$sql = "SElECT * FROM region ORDER BY weight ASC";
 		$result = $conn->exec($sql);
-		
 		return $result;
 	}
 
 	function getById($id){
 		global $conn;
-		
 		$id = cleanQuery($id);
 		
-		$sql = "SElECT * FROM region WHERE id = '$id'";
-		$result = $conn->exec($sql);
+		$sql = "SElECT * FROM region WHERE id = :id";
+		$criteria = array(
+			'id' => $id
+		);
+		$result = $conn->exec($sql, $criteria);
 		$row = $conn -> fetchArray($result);
 		return $row;
 	}
@@ -62,21 +80,23 @@ class Region{
 		global $conn;
 		
 		$id = cleanQuery($id);
-		$sql = "SElECT name FROM region WHERE id = '$id'";
-		$result = $conn->exec($sql);
+		$sql = "SElECT name FROM region WHERE id = :id";
+		$criteria = array(
+			'id' => $id
+		);
+		$result = $conn->exec($sql, $criteria);
 		$row = $conn -> fetchArray($result);
-		
 		return $row['title'];
 	}
 
 	function getLastWeight(){
 		global $conn;
-		$sql = "SElECT max(weight) FROM region";
+		$sql = "SElECT max(weight) as maxwt FROM region";
 		$result = $conn->exec($sql);
 		$numRows = $conn -> numRows($result);
 		if($numRows > 0){
 			$row = $conn->fetchArray($result);
-			return $row['max(weight)'] + 10;
+			return $row['maxwt'] + 10;
 		}
 		else
 			return 10;

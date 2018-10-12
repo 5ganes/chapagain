@@ -16,7 +16,7 @@
 			$this->dbname = "chapagain";
 			try {
 			    // new code
-				$pdo = new PDO("mysql:host=$this->host;dbname=$this->dbname", $this->uname, $this->psw);
+				$pdo = new PDO("mysql:host=$this->host;dbname=$this->dbname;charset=utf8", $this->uname, $this->psw);
 			    // set the PDO error mode to exception
 			    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			    // echo "Connected successfully"; 
@@ -31,10 +31,17 @@
 			// mysql_set_charset('utf8');
 		}
 		
-		function exec($sqlMain, $criteria){
+		function exec($sqlMain, $criteria = 0){
 			global $pdo;
+			// print_r($criteria);
 			$stmt = $pdo->prepare($sqlMain);
-			$stmt = $pdo->execute($criteria);
+			if($criteria == 0){ 
+				$stmt->execute();
+			}
+			else{
+				$stmt->execute($criteria);
+				// print_r($stmt);
+			}
 			return $stmt;
 		}
 		
@@ -44,24 +51,25 @@
 			return $result;
 		}
 		
-		function numRows($result)
+		function numRows($stmt)
 		{
-			return mysql_num_rows($result);			
+			return $stmt->rowCount();			
 		}
 		
-		function affRows()
+		function affRows($stmt)
 		{
-			return mysql_affected_rows();			
+			return $stmt->rowCount();			
 		}
 		
 		function insertId()
 		{
-			return mysql_insert_id();
+			global $pdo;
+			return $pdo->lastInsertId();
 		}
 		
 		function fetchArray($stmt){
-			global $pdo;
-			return $stmt->rowCount($stmt);
+			// global $pdo;
+			return $stmt->fetch();
 		}	
 		
 		function fetchObject($result)

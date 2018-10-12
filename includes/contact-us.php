@@ -1,4 +1,4 @@
-<?php $lan=$_GET['lan'];?>
+<?php //$lan=$_GET['lan'];?>
 <script language="javascript">
   function validateform(fm){
     // alert('sdf');

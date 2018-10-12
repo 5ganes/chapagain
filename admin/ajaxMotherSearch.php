@@ -1,11 +1,6 @@
 <?php
-	$host = "localhost";
-	$uname = "student"; 		
-	$psw = "student";					
-	$dbname = "chapagain";
-
-	mysql_connect($host, $uname, $psw);
-	mysql_select_db($dbname);
+	require '../data/conn.php';
+	$conn = new Dbconn();
 
 	$key = $_POST['keyword'];
 
@@ -19,9 +14,9 @@
 			FROM 
 				family join region on family.regionId = region.id 
 			WHERE (family.name LIKE '%$key%' OR family.id LIKE '%$key%') AND family.gender = 'Female'";
-	$result = mysql_query($sql);
-	if(mysql_num_rows($result) > 0){
-		while ($row = mysql_fetch_array($result)) {
+	$result = $conn->exec($sql);
+	if($conn->numRows($result) > 0){
+		while ($row = $conn->fetchArray($result)) {
 			echo '<a onClick="selectRowMother(\''.$row['name'].'\', \''.$row['id'].'\', \''.$row['regionName'].'\')">'.$row['name'].' ( ID : '. $row['id'] .' )( ' . $row['regionName'] . ' )</a>';
 		}
 	}

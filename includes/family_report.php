@@ -70,8 +70,8 @@
                           <?php
                             // get the first parents
                             $sql = "SElECT id, name FROM family WHERE id IN(1,2,3,4,5,6,7)";
-                            $result = mysql_query($sql);
-                            while($row = mysql_fetch_array($result)){
+                            $result = $conn->exec($sql);
+                            while($row = $conn->fetchArray($result)){
                               if($parentDBId == $row['id']) $selected = 'selected';
                               else $selected = '';
                               echo '<option value="' . $row['id'] . '" ' . $selected . '>' . $row['name'] . '</option>';
@@ -100,6 +100,7 @@
 <?php
   function findTree($parentDBId, $tree, $parent){
   //{ key: 0, name: "George V", gender: "M", birthYear: "1865", deathYear: "1936", reign: "1910-1936" },
+    global $conn;
       $sql ="SELECT 
             f1.id as id, 
             f1.name as name, 
@@ -119,11 +120,13 @@
                LEFT JOIN
                      family as f3 on rm.motherId = f3.id
            WHERE 
-              rf.fatherId  = '$parentDBId'";
-      
-      $cnt = mysql_query($sql);
-      if(mysql_num_rows($cnt) > 0){
-          while($res = mysql_fetch_array($cnt)){
+              rf.fatherId  = :parentDBId";
+      $criteria = array(
+        'parentDBId' => $parentDBId
+      );
+      $cnt = $conn->exec($sql, $criteria);
+      if($conn->numRows($cnt) > 0){
+          while($res = $conn->fetchArray($cnt)){
             global $key;
             $keyBackup = $key;
             $tree[] = '{ key: '. $key++ .', parent: ' . $parent .', name: "'. $res['name'] .'", gender: "'. substr($res['gender'], 0, 1) .'", motherName: "'. $res['motherName'] .'", bornDate: "'. $res['birthDate'] .'", maritalStatus: "'. $res['maritalStatus'] .'" }';

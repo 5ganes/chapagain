@@ -5,12 +5,13 @@ function createMenu($parentId, $groupType)
 	global $conn;
 
 	if ($parentId == 0){
+		// die($parentId . ', ' . $groupType);
 		$groupResult = $groups->getByParentIdAndType($parentId, $groupType);	
 	}
 	else{
 		$groupResult = $groups->getByParentId($parentId);		
 	}
-
+	// if($conn->numRows($groupResult) > 0) die('sdfsdfsdf');
 	if ($conn->numRows($groupResult) > 0 and $parentId != 0){
 		echo '<ul>';
 	}

@@ -1,64 +1,59 @@
 <?php
 class Family{
-	function saveOrUpdate($id, $name, $fatherId, $motherId, $birthDate, $email, $phone, $maritalStatus, $gotraId, 
-		$regionId, $gender, $publish, $weight){
+	function saveOrUpdate($id, $name, $fatherId, $motherId, $birthDate, $email, $phone, $maritalStatus, $gotraId, $regionId, $gender, $publish, $weight){
 		global $conn;
-		// echo $id; die();
 		
-		$id = cleanQuery($id);
-		$name = cleanQuery($name);
-		$fatherId = cleanQuery($fatherId);
-		$motherId = cleanQuery($motherId);
-		// echo $motherId; die();
-		$birthDate = cleanQuery($birthDate);
-		$email = cleanQuery($email);
-		$phone = cleanQuery($phone);
-		$maritalStatus = cleanQuery($maritalStatus);
-		$gotraId = cleanQuery($gotraId);
-		$regionId = cleanQuery($regionId);
-		$gender = cleanQuery($gender);
-		$publish = cleanQuery($publish);
-		$weight = cleanQuery($weight);
-		
+		$criteria = array();
 		if($id > 0){
-					// echo $id; die();
-					$sql = "UPDATE family
-						SET
-							name = '$name',
-							-- fatherId = '$fatherId',
-							-- motherId = '$motherId',
-							birthDate='$birthDate',
-							email = '$email',
-							phone = '$phone',
-							maritalStatus = '$maritalStatus',
-							gotraId = '$gotraId',
-							regionId = '$regionId',
-							gender = '$gender',
-							publish = '$publish',
-							weight = '$weight'
-						WHERE
-							id = '$id'";
+			$sql = "UPDATE family
+					SET
+						name = :name,
+						-- fatherId = '$fatherId',
+						-- motherId = '$motherId',
+						birthDate=:birthDate,
+						email = :email,
+						phone = :phone,
+						maritalStatus = :maritalStatus,
+						gotraId = :gotraId,
+						regionId = :regionId,
+						gender = :gender,
+						publish = :publish,
+						weight = :weight
+					WHERE
+						id = :id";
+			$criteria['id'] = $id;
 		}
 		else{
-					$sql = "INSERT INTO family 
-						SET
-							name = '$name',
-							-- fatherId = '$fatherId',
-							-- motherId = '$motherId',
-							birthDate='$birthDate',
-							email = '$email',
-							phone = '$phone',
-							maritalStatus = '$maritalStatus',
-							gotraId = '$gotraId',
-							regionId = '$regionId',
-							gender = '$gender',
-							publish = '$publish',
-							weight = '$weight',
-							onDate = NOW()";
+			$sql = "INSERT INTO family 
+					SET
+						name = '$name',
+						-- fatherId = '$fatherId',
+						-- motherId = '$motherId',
+						birthDate=:birthDate,
+						email = :email,
+						phone = :phone,
+						maritalStatus = :maritalStatus,
+						gotraId = :gotraId,
+						regionId = :regionId,
+						gender = :gender,
+						publish = :publish,
+						weight = :weight,
+						onDate = :onDate";
+			$criteria['onDate'] = date('Y-m-d');
 		}
-		$conn->exec($sql);
+		$criteria['name'] = $name;
+		$criteria['birthDate'] = $birthDate;
+		$criteria['email'] = $email;
+		$criteria['phone'] = $phone;
+		$criteria['maritalStatus'] = $maritalStatus;
+		$criteria['gotraId'] = $gotraId;
+		$criteria['regionId'] = $regionId;
+		$criteria['gender'] = $gender;
+		$criteria['publish'] = $publish;
+		$criteria['weight'] = $weight;
+
+		$stmt = $conn->exec($sql, $criteria);
 		if($id > 0){
-			// $insertId = $conn -> affRows();
 			$insertId = $id;
 		}
 		else{
@@ -70,38 +65,48 @@ class Family{
 	}
 
 	function saveParents($memberId, $fatherId, $motherId){
-		global $conn;
-		// echo $memberId.', '.$fatherId.', '.$motherId; die();
-		$sql = "SElECT * FROM rel_mother WHERE memberId = '$memberId'";
-		$member = $conn->exec($sql);
-		if($conn->numRows($member) > 0){
+		global $conn; 
+		$sql = "SElECT * FROM rel_mother WHERE memberId = :memberId";
+		$criteriaRel = array(
+			'memberId' => $memberId
+		);
+		$stmt = $conn->exec($sql, $criteriaRel);
+		if($conn->numRows($stmt) > 0){
 			$sqlf = "UPDATE rel_father
 						SET
-							fatherId = '$fatherId'
+							fatherId = :fatherId
 						WHERE
-							memberId = '$memberId'
+							memberId = :memberId
 					";
 			$sqlm = "UPDATE rel_mother
 						SET
-							motherId = '$motherId'
+							motherId = :motherId
 						WHERE
-							memberId = '$memberId'
+							memberId = :memberId
 					";
 		}
 		else{
 			$sqlf = "INSERT INTO rel_father 
 						SET
-							memberId = '$memberId',
-							fatherId = '$fatherId'
+							memberId = :memberId,
+							fatherId = fatherId
 					";
 			$sqlm = "INSERT INTO rel_mother 
 						SET
-							memberId = '$memberId',
-							motherId = '$motherId'
+							memberId = :memberId,
+							motherId = :motherId
 					";
 		}
-		$conn->exec($sqlf);
-		$conn->exec($sqlm);
+		$criteriaFather = array(
+			'memberId' => $memberId,
+			'fatherId' => $fatherId
+		);
+		$criteriaMother = array(
+			'memberId' => $memberId,
+			'motherId' => $motherId
+		);
+		$stmtF = $conn->exec($sqlf, $criteriaFather);
+		$stmtM = $conn->exec($sqlm, $criteriaMother);
 	}
 
 	function saveImage($id)
@@ -112,25 +117,28 @@ class Family{
 		if ($_FILES['image']['size'] <= 0)
 			return;
 		
-		$id = cleanQuery($id);
 		$filename = $_FILES['image']['name'];
 		$image = $filename;
 		copy($_FILES['image']['tmp_name'], "../". CMS_FAMILY_DIR . $image);
 		
-		$sql = "UPDATE family SET image = '$image' WHERE id = '$id'";
-		// echo $sql; die();
-		$conn->exec($sql);
+		$sql = "UPDATE family SET image = :image WHERE id = :id";
+		$criteria = array(
+			'id' => $id,
+			'image' => $image
+		);
+		$stmt = $conn->exec($sql, $criteria);
 	}
 
 	function updateImage($id, $image)
 	{
 		global $conn;
 		
-		$id = cleanQuery($id);
-		$image = cleanQuery($image);
-		
-		$sql = "UPDATE family SET image = '$image' WHERE id = '$id'";
-		$conn->exec($sql);
+		$sql = "UPDATE family SET image = :image WHERE id = id";
+		$criteria = array(
+			'id' => $id,
+			'image' => $image
+		);
+		$stmt = $conn->exec($sql, $criteria);
 	}
 	
 	function delete($id)
@@ -139,16 +147,17 @@ class Family{
 		
 		$id = cleanQuery($id);
 		
-		$result = $this->getById($id);
-		$row = $conn->fetchArray($result);
-		
+		$row = $this->getById($id);
 		$file = "../" . CMS_FAMILY_DIR . $row['image'];
 		
 		if (file_exists($file) && !empty($row['image']))
 			unlink($file);
 		
-		$sql = "DELETE FROM FAMILY WHERE id = '$id'";
-		$conn->exec($sql);
+		$sql = "DELETE FROM FAMILY WHERE id = :id";
+		$criteria = array(
+			'id' => $id
+		);
+		$stmt = $conn->exec($sql, $criteria);
 	}
 	
 	function getAll(){
@@ -163,8 +172,12 @@ class Family{
 	function getAllMales(){
 		global $conn;
 		
-		$sql = "SElECT * FROM family where gender = 'Male' AND maritalStatus = 'Married' ORDER BY weight ASC";
-		$result = $conn->exec($sql);
+		$sql = "SElECT * FROM family where gender = :gender AND maritalStatus = :maritalStatus ORDER BY weight ASC";
+		$criteria = array(
+			'gender' => 'Male',
+			'maritalStatus' => 'Married'
+		);
+		$result = $conn->exec($sql, $criteria);
 		
 		return $result;
 	}
@@ -172,8 +185,12 @@ class Family{
 	function getAllFemales(){
 		global $conn;
 		
-		$sql = "SElECT * FROM family where gender = 'Female' AND maritalStatus = 'Married' ORDER BY weight ASC";
-		$result = $conn->exec($sql);
+		$sql = "SElECT * FROM family where gender = :gender AND maritalStatus = :maritalStatus ORDER BY weight ASC";
+		$criteria = array(
+			'gender' => 'Female',
+			'maritalStatus' => 'Married'
+		);
+		$result = $conn->exec($sql, $criteria);
 		
 		return $result;
 	}
@@ -184,16 +201,17 @@ class Family{
 		
 		$id = cleanQuery($id);
 		
-		$sql = "SELECT * FROM family WHERE id = '$id'";
-		$result = $conn->exec($sql);
+		$sql = "SELECT * FROM family WHERE id = :id";
+		$criteria = array(
+			'id' => $id
+		);
+		$result = $conn->exec($sql, $criteria);
 		$row = $conn -> fetchArray($result);
-		// print_r($row); die();
 		return $row;
 	}
 
 	function getMemberById($id){
 		global $conn;
-		$id = cleanQuery($id);
 		$sql = "SELECT 
 					f1.id as id, 
 					f1.name as name, 
@@ -223,32 +241,35 @@ class Family{
 				LEFT JOIN
 					 family as f3 on rm.motherId = f3.id
 				WHERE 
-					f1.id = '$id'";
-		$result = $conn->exec($sql);
+					f1.id = :id";
+		$criteria = array(
+			'id' => $id
+		);
+		$result = $conn->exec($sql, $criteria);
 		$row = $conn -> fetchArray($result);
-		// print_r($row); die();
 		return $row;
 	}
 
 	function getMemberCountByGotra($gotraId){
-		// echo $id; die();
 		global $conn;
 		
-		$id = cleanQuery($id);
-		
-		$sql = "SElECT * FROM family WHERE gotraId = '$gotraId'";
-		$result = $conn->exec($sql);
-		return $conn->numRows($result);
+		$sql = "SElECT * FROM family WHERE gotraId = :gotraId";
+		$criteria = array(
+			'gotraId' => $gotraId
+		);
+		$stmt = $conn->exec($sql, $criteria);
+		return $conn->numRows($stmt);
 	}
 
 	function getMemberCountByRegion($regionId){
 		// echo $id; die();
 		global $conn;
-		
-		$id = cleanQuery($id);
-		
-		$sql = "SElECT * FROM family WHERE regionId = '$regionId'";
-		$result = $conn->exec($sql);
+	
+		$sql = "SElECT * FROM family WHERE regionId = :regionId";
+		$criteria = array(
+			'regionId' => $regionId
+		);
+		$result = $conn->exec($sql, $criteria);
 		return $conn->numRows($result);
 	}
 	
@@ -256,21 +277,23 @@ class Family{
 		global $conn;
 		
 		$id = cleanQuery($id);
-		$sql = "SElECT name FROM family WHERE id = '$id'";
-		$result = $conn->exec($sql);
+		$sql = "SElECT name FROM family WHERE id = :id";
+		$criteria = array(
+			'id' => $id
+		);
+		$result = $conn->exec($sql, $criteria);
 		$row = $conn -> fetchArray($result);
-		
 		return $row['title'];
 	}
 
 	function getLastWeight(){
 		global $conn;
-		$sql = "SElECT max(weight) FROM family";
+		$sql = "SElECT max(weight) as maxwt FROM family";
 		$result = $conn->exec($sql);
 		$numRows = $conn -> numRows($result);
 		if($numRows > 0){
 			$row = $conn->fetchArray($result);
-			return $row['max(weight)'] + 10;
+			return $row['maxwt'] + 10;
 		}
 		else
 			return 10;

@@ -2,20 +2,36 @@
 class Gotra{
 	function saveOrUpdate($id=0, $name, $publish, $weight){
 		global $conn;
+		$criteria = array();
+		if($id > 0){
+			$sql = "UPDATE 
+						gotra 
+					SET 
+						name = :name,  
+						publish = :publish, 
+						weight = :weight 
+					WHERE 
+					id = :id";
+			$criteria['id'] = $id;
+		}
+		else{
+			$sql = "INSERT INTO 
+						gotra 
+					SET 
+						name = :name, 
+						publish = :publish, 
+						weight = :weight,
+						onDate = :onDate";
+			$criteria['onDate'] = date('Y-m-d');
+		}
+		$criteria['name'] = $name;
+		$criteria['publish'] = $publish;
+		$criteria['weight'] = $weight;
 		
-		$id = cleanQuery($id);
-		$name = cleanQuery($name);
-		$publish = cleanQuery($publish);
-		$weight = cleanQuery($weight);
+		$stmt = $conn->exec($sql, $criteria);
+		
 		if($id > 0)
-			$sql = "UPDATE gotra SET name = '$name', onDate = NOW(), publish = '$publish', weight = '$weight' WHERE id = '$id'";
-		else
-			$sql = "INSERT INTO gotra SET name = '$name', onDate = NOW(), publish = '$publish', weight = '$weight'";
-		
-		$conn->exec($sql);
-		
-		if($id > 0)
-			return $conn -> affRows();
+			return $conn -> affRows($stmt);
 		return $conn->insertId();
 	}
 	
@@ -24,15 +40,16 @@ class Gotra{
 		global $conn;
 		global $family;
 		
-		$id = cleanQuery($id);
-		
 		//get members if exist
 		if($family->getMemberCountByGotra($id) > 0){
 			$msg = 'Gotra can not be deleted because there are members under it.';
 		}
 		else{
-			$sql = "DELETE FROM gotra WHERE id = '$id'";
-			$conn->exec($sql);
+			$sql = "DELETE FROM gotra WHERE id = :id";
+			$criteria = array(
+				'id' => $id
+			);
+			$stmt = $conn->exec($sql, $criteria);
 			$msg = 'Gotra deleted successfully';
 		}
 		return $msg;
@@ -43,40 +60,41 @@ class Gotra{
 		
 		$sql = "SElECT * FROM gotra ORDER BY weight ASC";
 		$result = $conn->exec($sql);
-		
 		return $result;
 	}
 
 	function getById($id){
 		global $conn;
 		
-		$id = cleanQuery($id);
-		
-		$sql = "SElECT * FROM gotra WHERE id = '$id'";
-		$result = $conn->exec($sql);
+		$sql = "SElECT * FROM gotra WHERE id = :id";
+		$criteria = array(
+				'id' => $id
+			);
+		$result = $conn->exec($sql, $criteria);
 		$row = $conn -> fetchArray($result);
 		return $row;
 	}
 	
 	function getTitle($id){
 		global $conn;
-		
-		$id = cleanQuery($id);
-		$sql = "SElECT name FROM gotra WHERE id = '$id'";
-		$result = $conn->exec($sql);
+	
+		$sql = "SElECT name FROM gotra WHERE id = :id";
+		$criteria = array(
+				'id' => $id
+			);
+		$result = $conn->exec($sql, $criteria);
 		$row = $conn -> fetchArray($result);
-		
 		return $row['title'];
 	}
 
 	function getLastWeight(){
 		global $conn;
-		$sql = "SElECT max(weight) FROM gotra";
+		$sql = "SElECT max(weight) as maxwt FROM gotra";
 		$result = $conn->exec($sql);
 		$numRows = $conn -> numRows($result);
 		if($numRows > 0){
 			$row = $conn->fetchArray($result);
-			return $row['max(weight)'] + 10;
+			return $row['maxwt'] + 10;
 		}
 		else
 			return 10;

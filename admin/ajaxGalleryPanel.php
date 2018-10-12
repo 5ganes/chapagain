@@ -20,7 +20,11 @@ if (isset($_GET['id']))
   <?php
 	$pagename = "cms.php?id=" . $_GET['id'] . "&parentId=" . $_GET['parentId'] . "&groupType=" . urlencode($_GET['groupType']) . "&";		
 
-	$sql = "SELECT * FROM groups WHERE parentId = '". $_GET['id'] . "' ORDER BY id DESC";
+	$sql = "SELECT * FROM groups WHERE parentId = :parentId ORDER BY id DESC";
+  // die($sql);
+  $criteria = array(
+    'parentId' => $_GET['id']
+  );
 	$limit = ADMIN_GALLERY_LIMIT;
 	include("../includes/paging.php");
 	

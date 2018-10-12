@@ -168,8 +168,11 @@
                                                         join rel_father as rf on f1.id=rf.memberId
                                                         join family as f2 on rf.fatherId = f2.id
                                                       where 
-                                                        f1.id = '$id'";
-                                $oldFather = $conn->fetchArray($conn->exec($sql));
+                                                        f1.id = :id";
+                                $criteria = array(
+                                  'id' => $id
+                                );
+                                $oldFather = $conn->fetchArray($conn->exec($sql, $criteria));
                                 $father = $family->getAllMales();
                                 while($record = $conn->fetchArray($father)) {?>
                                   <option value="<?=$record['id'];?>" <?php if($oldFather['fatherId']==$record['id']) echo 'selected'?>><?=$record['name']?></option>
@@ -201,8 +204,11 @@
                                                         join rel_mother as rf on f1.id=rf.memberId
                                                         join family as f2 on rf.motherId = f2.id
                                                       where 
-                                                        f1.id = '$id'";
-                                $oldMother = $conn->fetchArray($conn->exec($sql));
+                                                        f1.id = :id";
+                                $criteria = array(
+                                  'id' => $id
+                                );
+                                $oldMother = $conn->fetchArray($conn->exec($sql, $criteria));
                                 $mother = $family->getAllFemales();
                                 while($record = $conn->fetchArray($mother)) {?>
                                   <option value="<?=$record['id'];?>" <?php if($oldMother['motherId']==$record['id']) echo 'selected'?>><?=$record['name']?></option>

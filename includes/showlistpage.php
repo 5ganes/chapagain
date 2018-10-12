@@ -33,7 +33,10 @@
 					            <tbody style="color:black;text-align: left;">
 					            	<?php
 									$pagename = "index.php?linkId=". $pageId ."&";
-									$sql = "SELECT * FROM groups WHERE parentId = '$pageId' ORDER BY weight ASC";
+									$sql = "SELECT * FROM groups WHERE parentId = :parentId ORDER BY weight ASC";
+									$criteria = array(
+										'parentId' => $pageId
+									);
 									$newsql = $sql;
 									$limit = LISTING_LIMIT;
 
@@ -42,13 +45,13 @@
 									$aliasGet=$conn->fetchArray($alias);
 
 									include("includes/pagination.php");
-									$return = Pagination($sql, "", $limit, $aliasGet['urlname']);
+									$return = Pagination($sql, "", $limit, $aliasGet['urlname'], $criteria);
 									$arr = explode(" -- ", $return);
 									$start = $arr[0];
 									$pagelist = $arr[1];
 									$count = $arr[2];
 									$newsql .= " LIMIT $start, $limit";
-									$result = mysql_query($newsql); $cnt = 1;
+									$result = $conn->exec($newsql, $criteria); $cnt = 1;
 									while ($listRow = $conn->fetchArray($result))
 									{
 										if($cnt%2 == 1) $back = "white"; else $back = "#e8d7d7"; ?>
